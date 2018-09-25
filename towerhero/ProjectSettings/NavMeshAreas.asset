@@ -11,11 +11,9 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: PlayerArea
+  - name: Enemy
     cost: 1
-  - name: EnemyArea
-    cost: 1
-  - name: 
+  - name: Player
     cost: 1
   - name: 
     cost: 1
@@ -69,7 +67,9 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  m_LastAgentTypeID: -1372625422
+  - name: 
+    cost: 1
+  m_LastAgentTypeID: -1923039037
   m_Settings:
   - serializedVersion: 2
     agentTypeID: 0
@@ -88,11 +88,11 @@ NavMeshProjectSettings:
     debug:
       m_Flags: 0
   - serializedVersion: 2
-    agentTypeID: -1372625422
+    agentTypeID: -1923039037
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
-    agentClimb: 0.75
+    agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
