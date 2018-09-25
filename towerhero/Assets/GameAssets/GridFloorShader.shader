@@ -1,8 +1,10 @@
-﻿Shader "Standard/GridFloorShader"
+﻿// Source: https://forum.unity.com/threads/wireframe-grid-shader.60071/
+Shader "Standard/GridFloorShader"
 {
     Properties
     {
-        _Color ("Color", Color) = (1,1,1,1)
+        _Color ("Base Color", Color) = (1,1,1,1)
+        _LineColor ("Line Color", Color) = (1,1,1,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.2
         _Metallic ("Metallic", Range(0,1)) = 0.0
@@ -32,6 +34,7 @@
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+        fixed4 _LineColor;
         float _GridStep;
         float _GridWidth;
        
@@ -45,7 +48,7 @@
             float2 df = fwidth(pos) * _GridWidth;
             float2 g = smoothstep(-df ,df , f);
             float grid = 1.0 - saturate(g.x * g.y);
-            c.rgb = lerp(c.rgb, float3(1,1,1), grid);
+            c.rgb = lerp(c.rgb, _LineColor, grid);
            
             o.Albedo = c.rgb;
             // Metallic and smoothness come from slider variables

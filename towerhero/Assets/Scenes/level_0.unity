@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 669537539}
   - component: {fileID: 669537538}
   m_Layer: 0
-  m_Name: WorldTerran
+  m_Name: WorldTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
