@@ -1,12 +1,12 @@
 ﻿// Source: https://forum.unity.com/threads/wireframe-grid-shader.60071/
-Shader "Standard/GridFloorShader"
+Shader "Standard/PrefabPrototypeGridShader"
 {
     Properties
     {
-        _Color ("Base Color", Color) = (1,1,1,1)
-        _LineColor ("Line Color", Color) = (1,1,1,1)
+        _Color ("Base Color", Color) = (0.1294118,0.172549,0.2156863,1)
+        _LineColor ("Line Color", Color) = (0.4619972,0.5125082,0.5471698,1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
-        _Glossiness ("Smoothness", Range(0,1)) = 0.2
+        _Glossiness ("Smoothness", Range(0,1)) = 0.0
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _GridStep ("Grid size", Float) = 1
         _GridWidth ("Grid width", Float) = 1
