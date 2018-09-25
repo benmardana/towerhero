@@ -1,4 +1,5 @@
-﻿// Source: https://forum.unity.com/threads/wireframe-grid-shader.60071/
+﻿// Modified from: https://forum.unity.com/threads/wireframe-grid-shader.60071/
+// and: https://answers.unity.com/questions/803289/how-to-get-vertex-normal-into-surface-shader.html
 Shader "Standard/PrefabPrototypeGridShader"
 {
     Properties
@@ -9,7 +10,6 @@ Shader "Standard/PrefabPrototypeGridShader"
         _Glossiness ("Smoothness", Range(0,1)) = 0.0
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _GridStep ("Grid size", Float) = 1
-        _GridWidth ("Grid width", Float) = 1
     }
     SubShader
     {
@@ -18,7 +18,7 @@ Shader "Standard/PrefabPrototypeGridShader"
        
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Standard fullforwardshadows vertex:vert
  
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -29,6 +29,7 @@ Shader "Standard/PrefabPrototypeGridShader"
         {
             float2 uv_MainTex;
             float3 worldPos;
+            float3 vertexNormal;
         };
  
         half _Glossiness;
@@ -36,21 +37,32 @@ Shader "Standard/PrefabPrototypeGridShader"
         fixed4 _Color;
         fixed4 _LineColor;
         float _GridStep;
-        float _GridWidth;
+
+        void vert (inout appdata_full v, out Input o) {
+           UNITY_INITIALIZE_OUTPUT(Input,o);
+           o.vertexNormal = abs(v.normal);
+        }
        
         void surf (Input IN, inout SurfaceOutputStandard o) {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-           
+            
+            float2 pos = (IN.worldPos - mul(unity_ObjectToWorld, float4(0,0,0,1)).xyz).xz / _GridStep;
+            float3 normal = IN.vertexNormal;
+
             // grid overlay
-            float2 pos = IN.worldPos.xz / _GridStep;
-            float2 f  = abs(frac(pos));
-            float2 df = fwidth(pos) * _GridWidth;
-            float2 g = smoothstep(-df ,df , f);
-            float grid = 1.0 - saturate(g.x * g.y);
-            c.rgb = lerp(c.rgb, _LineColor, grid);
-           
+            if (normal.y == 1){            
+                float2 f  = abs(frac(pos));
+                float2 df = fwidth(pos);
+                float2 g = smoothstep(-df ,df , f);
+                float grid = 1.0 - saturate(g.x * g.y);
+                c.rgb = lerp(c.rgb, _LineColor, grid);
+            }
+            else {
+                c.rgb = _LineColor;
+            }
             o.Albedo = c.rgb;
+
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
