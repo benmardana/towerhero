@@ -9,6 +9,8 @@ TagManager:
   - EnemyGoal
   - EnemySpawn
   - PlayerSpawn
+  - InvisiblePlayerWall
+  - CameraCentre
   layers:
   - Default
   - TransparentFX
