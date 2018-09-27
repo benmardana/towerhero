@@ -9,7 +9,7 @@ public class EnemyAIScript : MonoBehaviour {
 
 	void Start() {
 		AIAgent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
-		// AIAgent.speed = Random.Range(3f, 4f);
+		AIAgent.speed = Random.Range(6f, 7f);
 		goal = GameObject.FindWithTag("EnemyGoal");
 		Animate();
 	}
