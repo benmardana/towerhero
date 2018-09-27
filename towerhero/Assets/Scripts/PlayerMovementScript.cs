@@ -12,6 +12,7 @@ public class PlayerMovementScript : MonoBehaviour {
 
 	void Start() {
 		m_Camera = GameObject.FindWithTag("MainCamera");
+		ResetRelativeDirection();
 	}
 
 	void Update() {

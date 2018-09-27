@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 33555060587485916}
   - component: {fileID: 114673598738615046}
   - component: {fileID: 64884377268117042}
-  - component: {fileID: 114820400263605996}
   - component: {fileID: 114120254303449100}
   m_Layer: 10
   m_Name: Environment Prefab Prototype Wall1
@@ -39,9 +38,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1028619315184232}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.9, y: 0, z: 2.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.9666667, y: 0, z: 0.9533333}
+  m_LocalScale: {x: 0.33333334, y: 1, z: 0.33333334}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -2397,29 +2396,6 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 00000000
-  m_SelectedEdges:
-  - x: 0
-    y: 0
-  - x: 0
-    y: 0
-  - x: 0
-    y: 0
-  - x: 0
-    y: 0
-  - x: 0
-    y: 0
-  - x: 0
-    y: 0
-  m_selectedTriangles: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
---- !u!114 &114820400263605996
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1028619315184232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77cf18a2dc2084e1e94f4405dd3e4d90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_selectedFaces: 
+  m_SelectedEdges: []
+  m_selectedTriangles: 

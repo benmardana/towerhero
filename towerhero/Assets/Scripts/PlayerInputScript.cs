@@ -22,7 +22,7 @@ public class PlayerInputScript : MonoBehaviour {
 				// move player
 				movementScript.HandleMovement();
 			}
-			if(Input.GetButtonDown("Fire2")) {
+			if(Input.GetKey(KeyCode.Mouse1)) {
 				// pan camera
 				cameraScript.HandlePan();
          	}
