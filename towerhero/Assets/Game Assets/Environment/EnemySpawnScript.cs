@@ -7,7 +7,9 @@ public class EnemySpawnScript : MonoBehaviour {
 	public float groupSpawnPeriodS = 10.0f;
 	public int groupSize = 5;
 	int spawned = 0;
-	public Transform enemyUnit;
+
+	// list enables multiple enemy prefabs to be dropped in
+	public Transform[] enemyUnits;
 
 	void Start () {
 		InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriodS);
@@ -17,6 +19,7 @@ public class EnemySpawnScript : MonoBehaviour {
 	void Update () {
 		if (spawned >= 5){
 			StopAllCoroutines();
+			spawned = 0;
 		}
 	}
 
@@ -33,6 +36,17 @@ public class EnemySpawnScript : MonoBehaviour {
 	}
 
 	void SpawnEnemy(){
-		Instantiate(enemyUnit, this.transform.position, Quaternion.identity);
+		foreach(Transform enemy in enemyUnits) {
+			Vector3 spawnPoint = RandomPointInXZBounds(this.GetComponent<MeshCollider>().bounds);
+			Instantiate(enemy, spawnPoint, Quaternion.identity);
+		}		
 	}
+
+	public static Vector3 RandomPointInXZBounds(Bounds bounds) {
+    return new Vector3(
+        Random.Range(bounds.min.x, bounds.max.x),
+        0,
+        Random.Range(bounds.min.z, bounds.max.z)
+    );
+}
 }
