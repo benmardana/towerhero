@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 23714893454291480}
   - component: {fileID: 136612941694865774}
   - component: {fileID: 54555337068820184}
+  - component: {fileID: 114297669622953852}
+  - component: {fileID: 114656343493580666}
+  - component: {fileID: 114417408379317704}
   m_Layer: 0
   m_Name: Player Prefab Prototype
   m_TagString: Player
@@ -98,8 +101,43 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &114297669622953852
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094591773609490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f2eee2d91de41b0a78004f1eaf978b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114417408379317704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094591773609490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4d5c9e42ab3431eaaea810fa1c5958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.5
+--- !u!114 &114656343493580666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094591773609490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a234438ec1f0a41bc8fdf3b89f147939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
 --- !u!136 &136612941694865774
 CapsuleCollider:
   m_ObjectHideFlags: 1

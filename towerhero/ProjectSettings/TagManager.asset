@@ -8,6 +8,9 @@ TagManager:
   - Turret
   - EnemyGoal
   - EnemySpawn
+  - PlayerSpawn
+  - InvisiblePlayerWall
+  - CameraCentre
   layers:
   - Default
   - TransparentFX
