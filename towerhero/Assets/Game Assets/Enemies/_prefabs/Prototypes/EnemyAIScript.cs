@@ -10,9 +10,6 @@ public class EnemyAIScript : MonoBehaviour {
 	void Awake() {
 		gameObject.AddComponent<UnityEngine.AI.NavMeshAgent>();
 		AIAgent = this.GetComponent<UnityEngine.AI.NavMeshAgent>();
-	}
-
-	void Start () {
 		goal = GameObject.FindWithTag("EnemyGoal");
 		AIAgent.SetDestination(goal.transform.position);
 	}
