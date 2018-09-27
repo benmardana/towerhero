@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 33034004383112438}
   - component: {fileID: 114029451826479542}
   - component: {fileID: 65980480864858606}
+  - component: {fileID: 114253299594331482}
   m_Layer: 0
   m_Name: EndGoal
   m_TagString: EnemyGoal
@@ -396,3 +397,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
+--- !u!114 &114253299594331482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355224379415024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc11842cccf54b23bdf528ef9fa793d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  gameOverScreen: {fileID: 0}
