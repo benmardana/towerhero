@@ -24,12 +24,15 @@ GameObject:
   - component: {fileID: 33827965343989532}
   - component: {fileID: 114780121396490064}
   - component: {fileID: 64329150017918428}
-  m_Layer: 0
+  - component: {fileID: 114233676151386444}
+  - component: {fileID: 114413606749892484}
+  - component: {fileID: 114601337590837922}
+  m_Layer: 10
   m_Name: Environment Prefab Prototype Wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 3
-  m_StaticEditorFlags: 127
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 95
   m_IsActive: 1
 --- !u!4 &4737864522379512
 Transform:
@@ -59,7 +62,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 7d1d3d246f10949b7bc32ccc30fa2eda, type: 2}
+  - {fileID: 2100000, guid: 55296d1b6ee54e14e8eb4648d4b448ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,6 +103,47 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
+--- !u!114 &114233676151386444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904379576902072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77cf18a2dc2084e1e94f4405dd3e4d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114413606749892484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904379576902072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: 466f31ca
+--- !u!114 &114601337590837922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904379576902072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.4102306, y: 1.127676, z: 1.1183329}
+  m_Center: {x: 3.8188505, y: 0.063838005, z: -0.8757043}
+  m_Area: 1
+  m_AffectedAgents: 466f31ca
 --- !u!114 &114780121396490064
 MonoBehaviour:
   m_ObjectHideFlags: 1
