@@ -28,20 +28,24 @@ public class PlayerInputScript : MonoBehaviour {
 				// pan camera
 				cameraScript.HandlePan();
          	}
-			//if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            if (Input.GetKey(KeyCode.Escape)) {
+                // pause menu camera
+                // TODO
+            }
+            //if (Input.GetKeyDown(KeyCode.Mouse0)) {
             //if (Input.GetKeyDown(KeyCode.F)) { 
             //    // shoot weapons
             //    weaponController.Shoot();
-			//}
-			// // arbitrarily chose if you hold down t and click then that is a turret placement
-			// if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T)) {
-			// 	// place turrets
-			// 	HandleTurrets();
-			// }
-			// if (Input.GetKey(KeyCode.Escape)) {
-			// 	// pause etc
-			// 	HandleMisc();
-			// }
-		}
+            //}
+            // // arbitrarily chose if you hold down t and click then that is a turret placement
+            // if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T)) {
+            // 	// place turrets
+            // 	HandleTurrets();
+            // }
+            // if (Input.GetKey(KeyCode.Escape)) {
+            // 	// pause etc
+            // 	HandleMisc();
+            // }
+        }
 	}
 }

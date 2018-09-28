@@ -11,6 +11,9 @@ TagManager:
   - PlayerSpawn
   - InvisiblePlayerWall
   - CameraCentre
+  - LivesText
+  - ResourcesText
+  - WaveText
   layers:
   - Default
   - TransparentFX
