@@ -9,4 +9,4 @@ public class PlayerSpawnScript : MonoBehaviour {
 	void Start () {
 		Instantiate(player, this.transform.position, Quaternion.identity);
 	}
-	}
+}
