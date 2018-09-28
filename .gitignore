@@ -3,8 +3,6 @@
 [Oo]bj/
 [Bb]uild/
 [Bb]uilds/
-Assets/AssetStoreTools*
-ProCore*
 
 # Visual Studio cache directory
 .vs/
