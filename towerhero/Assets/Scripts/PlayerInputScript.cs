@@ -13,7 +13,7 @@ public class PlayerInputScript : MonoBehaviour {
 	void Start () {
 		movementScript = GetComponent<PlayerMovementScript>();
 		cameraScript = GetComponent<PlayerCameraScript>();
-        weaponController = GetComponent<WeaponController>();
+        //weaponController = GetComponent<WeaponController>();
 	}
 	
 	void Update () {
