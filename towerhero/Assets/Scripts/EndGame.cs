@@ -4,20 +4,15 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class EndGame : MonoBehaviour {
-
-	public int startingLives = 3;
-
+   
 	public Canvas gameOverScreen;
 	public int time = 5;
 
-    private int lives;  // number of lives
-
     void Start () {
-        lives = startingLives;
 	}
 	
 	void Update () {
-		if (lives <= 0){
+		if (GameState.lives <= 0){
 			// Load up Game Over Screen
 			Instantiate(gameOverScreen);
 			Scene loadedLevel = SceneManager.GetActiveScene();
@@ -30,11 +25,12 @@ public class EndGame : MonoBehaviour {
 	IEnumerator ReloadScene(Scene level){
 		// wait for the set time
 		yield return new WaitForSeconds(time);
+        GameState.ResetLives();
 		SceneManager.LoadScene (level.buildIndex);
 	}
 
     // for each enemy which gets to the goal, reduce lives
     public void reduceLives(){
-        lives--;
+        GameState.lives -= 1;
 	}
 }
