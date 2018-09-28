@@ -18,18 +18,22 @@ public class WeaponController : MonoBehaviour {
 	void Start () {
         unitDirection = this.gameObject.transform.forward.normalized;
         shotPeriod = 1.0f / firerate;
-        EnableWeapon();
+        DisableWeapon();
         timeSinceLastShot = 0.0f;
     }
-	
-	// Checks if next shot should be made, and makes it
+
 	void Update () {
+
+        // Checks if next shot should be made, and makes it
         timeSinceLastShot += Time.deltaTime;
         if (weaponEnabled && timeSinceLastShot > shotPeriod) {
             Shoot();
             timeSinceLastShot = 0.0f;
         }
-	}
+
+        // Updating shooting direction
+        unitDirection = this.gameObject.transform.forward.normalized;
+    }
 
     // Fire the weapon
     public void Shoot() {
