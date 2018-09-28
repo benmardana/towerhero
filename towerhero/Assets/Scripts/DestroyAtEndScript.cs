@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// If an enemy reaches the end goal, decrement number of player lives by 1 and 
+// destroy the enemy.
 public class DestroyAtEndScript : MonoBehaviour {
-
-	public int damage = 1;
-
+    
 	void OnTriggerEnter(Collider col) {
         if (col.gameObject.tag == "EnemyGoal") {
-			// reduce health
+			// reduce lives
             EndGame endGoal = col.gameObject.GetComponent<EndGame>();
-            endGoal.reduceHealth(damage);
+            endGoal.reduceLives();
 
             // Destroy self
             Destroy(this.gameObject);
