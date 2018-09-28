@@ -12,7 +12,7 @@ public class ProjectileController : MonoBehaviour {
     public int damageAmount = 50;
     
     void Update() {
-        this.transform.Translate(unitVelocity * speed * Time.deltaTime);
+        this.gameObject.transform.Translate(unitVelocity * speed * Time.deltaTime);
     }
 
     // Handle collisions
