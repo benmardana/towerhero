@@ -19,19 +19,18 @@ public class EnemySpawnScript : MonoBehaviour {
 	
 	void Update () {
 		// if 5 sets have been spawned, stop spawning any more
-		if (spawned >= 5){
+		if (spawned >= 5) {
 			StopAllCoroutines();
 			spawned = 0;
 		}
 	}
 
-	void SpawnEnemies(){
+	void SpawnEnemies() {
 		StartCoroutine(Spawn());
 	}
 
 	// spawns enemies every second
-	IEnumerator Spawn()
-	{
+	IEnumerator Spawn() {
 		yield return new WaitForSeconds(1f);
 		spawned += 1;
 		SpawnEnemy();
@@ -40,7 +39,7 @@ public class EnemySpawnScript : MonoBehaviour {
 
 	// will spawn enemies at random points in a given bounding box
 	// strictly only works on regular quadrilateral boxes
-	void SpawnEnemy(){
+	void SpawnEnemy() {
 		foreach(Transform enemy in enemyUnits) {
 			Vector3 spawnPoint = RandomPointInXZBounds(this.GetComponent<MeshCollider>().bounds);
 			Instantiate(enemy, spawnPoint, Quaternion.identity);
@@ -48,10 +47,10 @@ public class EnemySpawnScript : MonoBehaviour {
 	}
 
 	public static Vector3 RandomPointInXZBounds(Bounds bounds) {
-    return new Vector3(
-        Random.Range(bounds.min.x, bounds.max.x),
-        0,
-        Random.Range(bounds.min.z, bounds.max.z)
-    );
-}
+        return new Vector3(
+            Random.Range(bounds.min.x, bounds.max.x),
+            0,
+            Random.Range(bounds.min.z, bounds.max.z)
+        );
+    }
 }

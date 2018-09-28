@@ -19,7 +19,7 @@ public class EnemyAIScript : MonoBehaviour {
 		Animate();
 	}
 
-	void Animate(){
+	void Animate() {
 		AIAgent.SetDestination(goal.transform.position);
 	}
 }
