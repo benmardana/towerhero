@@ -7,11 +7,13 @@ public class PlayerInputScript : MonoBehaviour {
 
 	PlayerMovementScript movementScript;
 	PlayerCameraScript cameraScript;
+    WeaponController weaponController;
 
 	// assign all slave scripts in Start()
 	void Start () {
 		movementScript = GetComponent<PlayerMovementScript>();
 		cameraScript = GetComponent<PlayerCameraScript>();
+        weaponController = GetComponent<WeaponController>();
 	}
 	
 	void Update () {
@@ -26,10 +28,11 @@ public class PlayerInputScript : MonoBehaviour {
 				// pan camera
 				cameraScript.HandlePan();
          	}
-			// if (Input.GetButtonDown("Fire1")) {
-			// 	// shoot weapons
-			// 	HandleWeapons();
-			// }
+			//if (Input.GetKeyDown(KeyCode.Mouse0)) {
+            //if (Input.GetKeyDown(KeyCode.F)) { 
+            //    // shoot weapons
+            //    weaponController.Shoot();
+			//}
 			// // arbitrarily chose if you hold down t and click then that is a turret placement
 			// if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T)) {
 			// 	// place turrets
