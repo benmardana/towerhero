@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class EndGame : MonoBehaviour {
 
-	public int maxHealth = 3;
-	int health = 3;
+	public int startingLives = 3;
 
 	public Canvas gameOverScreen;
 	public int time = 5;
 
-	void Start () {
-		
+    private int lives;  // number of lives
+
+    void Start () {
+        lives = startingLives;
 	}
 	
 	void Update () {
-		if (health <= 0){
+		if (lives <= 0){
 			// Load up Game Over Screen
 			Instantiate(gameOverScreen);
 			Scene loadedLevel = SceneManager.GetActiveScene();
@@ -32,7 +33,8 @@ public class EndGame : MonoBehaviour {
 		SceneManager.LoadScene (level.buildIndex);
 	}
 
-	public void reduceHealth(int damage){
-		health -= damage;
+    // for each enemy which gets to the goal, reduce lives
+    public void reduceLives(){
+        lives--;
 	}
 }
