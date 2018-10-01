@@ -9,7 +9,6 @@ public class PlayerInputScript : MonoBehaviour {
 	PlayerCameraScript cameraScript;
     ClickController clickController;
     WeaponController weaponController;
-    ResourceManager resourceManager;
 
 	// assign all slave scripts in Start()
 	void Start () {
@@ -17,7 +16,6 @@ public class PlayerInputScript : MonoBehaviour {
 		cameraScript = GetComponent<PlayerCameraScript>();
         //weaponController = GetComponent<WeaponController>();
         clickController = GetComponent<ClickController>();
-        resourceManager = GetComponent<ResourceManager>();
 	}
 	
 	public void Update () {
@@ -50,11 +48,32 @@ public class PlayerInputScript : MonoBehaviour {
 
                     if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
                     {
-                        GameObject turret = Instantiate(Resources.Load("turret"), hit.point, Quaternion.identity) as GameObject;
-                        ResourceManager.TurretBuilt();
+                        if (hit.collider.tag == "Wall")
+                        {
+                            GameObject turret = (GameObject) Resources.Load("turret");
+                            // This ensures the turret is loaded 'above' the wall.
+                            Vector3 instantiationPoint = new Vector3(hit.point.x, hit.point.y + turret.transform.position.y, hit.point.z);
+                            Instantiate(turret, instantiationPoint, Quaternion.identity);
+                            ResourceManager.TurretBuilt();
+                        }
                     }
                 }
             }
+
+            if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.X))
+            {
+                RaycastHit hit;
+
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                {
+                    if (hit.collider.tag == "Turret" || hit.collider.tag == "Bridge")
+                    {
+                        Destroy(hit.collider.gameObject);
+                        ResourceManager.ReturnResources();
+                    }
+                }
+            }
+
             // if (Input.GetKey(KeyCode.Escape)) {
             // 	// pause etc
             // 	HandleMisc();

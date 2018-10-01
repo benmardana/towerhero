@@ -27,6 +27,12 @@ public class ResourceManager : MonoBehaviour {
         resources -= 50;
     }
 
+    // In future this should take a bridge or turret type and dynamically calculate a percentage (~80%)? to return.
+    public static void ReturnResources()
+    {
+        resources += 40;
+    }
+
     public static void ResetResources()
     {
         resources = 200;
