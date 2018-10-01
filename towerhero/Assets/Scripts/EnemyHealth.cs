@@ -2,12 +2,15 @@
 
 public class EnemyHealth : MonoBehaviour {
 
+    ResourceManager resourceManager;
+
     public int initialHealth = 100; // varies for different enemies
     // TODO public GameObject createOnDestroy;  // something to create when enemy is destroyed
 
 	private int currentHealth;
 
     void Start() {
+        resourceManager = GetComponent<ResourceManager>();
         currentHealth = initialHealth;
     }
 
@@ -19,8 +22,7 @@ public class EnemyHealth : MonoBehaviour {
         // If health is depleted, delete enemy and increment Player's resources
         if (currentHealth <= 0) {
             Destroy(this.gameObject);
-
-            // TODO - increment player's resources (using ResourceManager)
+            ResourceManager.EnemyIsKilled();
         }
     }
 

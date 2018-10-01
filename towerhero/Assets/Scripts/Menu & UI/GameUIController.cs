@@ -25,7 +25,7 @@ public class GameUIController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         livesText.text = "Lives: " + GameState.lives; 
-        resourcesText.text = "Resources: " + 0;             // TODO - requires resource manager (Adam)
+        resourcesText.text = "Resources: " + ResourceManager.resources;             // TODO - requires resource manager (Adam)
         waveText.text = "Waves: " + GameState.waveNumber;   // TODO - requires implementation of waves
     }
 }

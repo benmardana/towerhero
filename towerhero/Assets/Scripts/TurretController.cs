@@ -24,4 +24,9 @@ public class TurretController : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, range);
     }
+
+    public void handleTurrets()
+    {
+        
+    }
 }

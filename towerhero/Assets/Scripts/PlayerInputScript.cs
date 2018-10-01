@@ -7,16 +7,20 @@ public class PlayerInputScript : MonoBehaviour {
 
 	PlayerMovementScript movementScript;
 	PlayerCameraScript cameraScript;
+    ClickController clickController;
     WeaponController weaponController;
+    ResourceManager resourceManager;
 
 	// assign all slave scripts in Start()
 	void Start () {
 		movementScript = GetComponent<PlayerMovementScript>();
 		cameraScript = GetComponent<PlayerCameraScript>();
         //weaponController = GetComponent<WeaponController>();
+        clickController = GetComponent<ClickController>();
+        resourceManager = GetComponent<ResourceManager>();
 	}
 	
-	void Update () {
+	public void Update () {
 		// if input is detected
 		// check what it is then call the relevant function from the slave script
 		if (Input.anyKey) {
@@ -37,11 +41,20 @@ public class PlayerInputScript : MonoBehaviour {
             //    // shoot weapons
             //    weaponController.Shoot();
             //}
-            // // arbitrarily chose if you hold down t and click then that is a turret placement
-            // if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T)) {
-            // 	// place turrets
-            // 	HandleTurrets();
-            // }
+            // arbitrarily chose if you hold down t and click then that is a turret placement
+            if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T))
+            {
+                if (ResourceManager.resources >= 50)
+                {
+                    RaycastHit hit;
+
+                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+                    {
+                        GameObject turret = Instantiate(Resources.Load("turret"), hit.point, Quaternion.identity) as GameObject;
+                        ResourceManager.TurretBuilt();
+                    }
+                }
+            }
             // if (Input.GetKey(KeyCode.Escape)) {
             // 	// pause etc
             // 	HandleMisc();
