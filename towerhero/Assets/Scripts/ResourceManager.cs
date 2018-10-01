@@ -2,18 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour {
+public static class ResourceManager {
 
     public static int resources = 200;
-
-    // Use this for initialization
-	void Start () {
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     // In future this will take an enemy type and determine amt.
     public static void EnemyIsKilled()

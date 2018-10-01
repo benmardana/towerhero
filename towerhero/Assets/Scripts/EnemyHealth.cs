@@ -2,15 +2,12 @@
 
 public class EnemyHealth : MonoBehaviour {
 
-    ResourceManager resourceManager;
-
     public int initialHealth = 100; // varies for different enemies
     // TODO public GameObject createOnDestroy;  // something to create when enemy is destroyed
 
 	private int currentHealth;
 
     void Start() {
-        resourceManager = GetComponent<ResourceManager>();
         currentHealth = initialHealth;
     }
 

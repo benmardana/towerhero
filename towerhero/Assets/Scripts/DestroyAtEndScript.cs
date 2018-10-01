@@ -9,7 +9,7 @@ public class DestroyAtEndScript : MonoBehaviour {
 	void OnTriggerEnter(Collider col) {
         if (col.gameObject.tag == "EnemyGoal") {
 			// reduce lives
-            EndGame endGoal = col.gameObject.GetComponent<EndGame>();
+            LevelController endGoal = col.gameObject.GetComponent<LevelController>();
             endGoal.reduceLives();
 
             // Destroy self
