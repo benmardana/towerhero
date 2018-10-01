@@ -25,7 +25,7 @@ public class EndGame : MonoBehaviour {
 	IEnumerator ReloadScene(Scene level){
 		// wait for the set time
 		yield return new WaitForSeconds(time);
-        GameState.ResetLives();
+        GameState.ResetGameState();
 		SceneManager.LoadScene (level.buildIndex);
 	}
 
