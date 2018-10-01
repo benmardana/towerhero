@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 114601337590837922}
   m_Layer: 10
   m_Name: Environment Prefab Prototype Wall2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 95
