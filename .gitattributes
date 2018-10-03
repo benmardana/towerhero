@@ -4,7 +4,6 @@
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
-
 # 3D models
 *.3dm filter=lfs diff=lfs merge=lfs -text
 *.3ds filter=lfs diff=lfs merge=lfs -text
@@ -52,3 +51,4 @@
 *.tga filter=lfs diff=lfs merge=lfs -text
 *.tif filter=lfs diff=lfs merge=lfs -text
 *.tiff filter=lfs diff=lfs merge=lfs -text
+LightmapSnapshot.asset filter=lfs diff=lfs merge=lfs -text
