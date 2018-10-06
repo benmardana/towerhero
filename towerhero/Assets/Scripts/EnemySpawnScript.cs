@@ -41,8 +41,9 @@ public class EnemySpawnScript : MonoBehaviour {
 	// strictly only works on regular quadrilateral boxes
 	void SpawnEnemy() {
 		foreach(Transform enemy in enemyUnits) {
-			Vector3 spawnPoint = RandomPointInXZBounds(this.GetComponent<MeshCollider>().bounds);
-			Instantiate(enemy, spawnPoint, Quaternion.identity);
+            GameObject knight = (GameObject)Resources.Load("LanceKnight_YELLOW");
+            Vector3 spawnPoint = RandomPointInXZBounds(this.GetComponent<MeshCollider>().bounds);
+			Instantiate(knight, spawnPoint, Quaternion.identity);
 		}		
 	}
 

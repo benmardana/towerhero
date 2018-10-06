@@ -50,7 +50,7 @@ public class PlayerInputScript : MonoBehaviour {
                     {
                         if (hit.collider.tag == "Wall")
                         {
-                            GameObject turret = (GameObject) Resources.Load("turret");
+                            GameObject turret = (GameObject) Resources.Load("Flag_RED");
                             // This ensures the turret is loaded 'above' the wall.
                             Vector3 instantiationPoint = new Vector3(hit.point.x, hit.point.y + turret.transform.position.y, hit.point.z);
                             Instantiate(turret, instantiationPoint, Quaternion.identity);
