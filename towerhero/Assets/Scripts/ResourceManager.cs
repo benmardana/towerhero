@@ -4,28 +4,33 @@ using UnityEngine;
 
 public static class ResourceManager {
 
-    public static int resources = 200;
+    public const int StartingResources = 200;
+    public const int EnemyKilledResources = 5;
+    public const int TurretBuiltResources = 50;
+    public const double PercentageResourcesReturned = 0.8;
 
-    // In future this will take an enemy type and determine amt.
+    public static int resources = StartingResources;
+
+    // TODO(Adam) In future this will take an enemy type and determine amt.
     public static void EnemyIsKilled()
     {
-        resources += 5;
+        resources += EnemyKilledResources;
     }
 
-    // This will also take a turret type.
+    // TODO(Adam) - This will also take a turret type.
     public static void TurretBuilt()
     {
-        resources -= 50;
+        resources -= TurretBuiltResources;
     }
 
-    // In future this should take a bridge or turret type and dynamically calculate a percentage (~80%)? to return.
+    // TODO(Adam) - In future this should take a bridge or turret type and dynamically calculate a percentage (~80%)? to return.
     public static void ReturnResources()
     {
-        resources += 40;
+        resources += (int) (TurretBuiltResources * PercentageResourcesReturned);
     }
 
     public static void ResetResources()
     {
-        resources = 200;
+        resources = StartingResources;
     }
 }
