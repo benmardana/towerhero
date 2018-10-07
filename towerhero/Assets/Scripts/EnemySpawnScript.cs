@@ -4,35 +4,60 @@ using UnityEngine;
 
 public class EnemySpawnScript : MonoBehaviour {
 
-	public float groupSpawnPeriodS = 10.0f;
-	public int groupSize = 5;
-	int spawned = 0;
+    private const int InitNumberOfGroups = 3;
+    private const float TimeBetweenWaves = 15f;
+
+	public float groupSpawnPeriod = 5.0f;
+
+	private int numberOfGroups = InitNumberOfGroups + GameState.waveNumber;
+	private int numberOfGroupsSpawned = 0;    
 
 	// list enables multiple enemy prefabs to be dropped in for larger crowds
 	// doing more than 2 can cause some clipping issues though
+    // Note: Units dropped in via the editor
+    // Note2: Number of enemies spawned per wave == enemyUnits.length() * numberOfGroups
 	public Transform[] enemyUnits;
 
 	// After 1 second, begin spawning enemies at regular intervals
 	void Start () {
-		InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriodS);
+		InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriod);
 	}
 	
 	void Update () {
-		// if 5 sets have been spawned, stop spawning any more
-		if (spawned >= 5) {
-			StopAllCoroutines();
-			spawned = 0;
+
+		// if numberOfGroups groups been spawned, stop spawning any more
+		if (numberOfGroupsSpawned >= numberOfGroups) {
+            // Stop all active Spawn() coroutines
+            StopAllCoroutines();
+
+            // Stop the current wave
+            numberOfGroupsSpawned = 0;
+            CancelInvoke("SpawnEnemies");
+            StartCoroutine(Pause());
+
 		}
 	}
+
+    // move to the next wave after waiting
+    IEnumerator Pause() {
+        yield return new WaitForSeconds(TimeBetweenWaves);
+        InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriod);
+        GameState.waveNumber++;
+    }
+
+    public void resetNumberOfGroupsSpawned() {
+        numberOfGroupsSpawned = 0;
+    }
 
 	void SpawnEnemies() {
 		StartCoroutine(Spawn());
 	}
 
 	// spawns enemies every second
+    // (runs through and starts another coroutine before dieing)
 	IEnumerator Spawn() {
 		yield return new WaitForSeconds(1f);
-		spawned += 1;
+        numberOfGroupsSpawned++;
 		SpawnEnemy();
 		StartCoroutine(Spawn());
 	}
