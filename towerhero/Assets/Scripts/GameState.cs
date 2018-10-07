@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class GameState
 {
-    public const int StartingLives = 3;
+    public const int StartingLives = 30;
     public const int StartingWave = 1;
     public const int FinalWave = 5;
     public const int StartingLevel = 1;
     public const int FinalLevel = 3;
 
-    public static int lives = StartingLives;  // number of lives (remaining)	
+    public static int lives = StartingLives;  // number of lives (remaining), per level	
     public static int waveNumber = StartingWave;
     public static int levelNumber = StartingLevel;
 
@@ -32,6 +32,20 @@ public static class GameState
     }
 
     // Should get called when a new level is loaded
+    public static void LoadNextLevelState()
+    {
+        ResetLives();
+        ResetWaveNumber();
+        ResourceManager.ResetResources();
+
+        levelNumber++;
+        if (levelNumber > FinalLevel) {
+            // TODO - Ensure that last level is loaded
+        }
+    }
+
+
+
     public static void ResetGameState()
     {
         ResetLives();

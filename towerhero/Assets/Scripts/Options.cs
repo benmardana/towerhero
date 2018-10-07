@@ -19,7 +19,7 @@ public static class Options {
         set
         {
             Options._difficulty = value;
-            Options.enemyMovementSpeedMultiplier = (1.0f + value);
+            Options.enemyMovementSpeedMultiplier = (0.5f + value);
         }
     }
 
