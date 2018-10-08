@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 // TODO - firerate, this only applies to turrets not to heros? also depends on weapon type...
@@ -8,7 +9,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour {
 
     public GameObject projectilePrefab;
-    public float firerate;              // shots per second
+    [FormerlySerializedAs("firerate")] public float Firerate;              // shots per second
     private Vector3 unitDirection;     // direction the gun is aiming in
     private float shotPeriod;           // time between shots (in seconds)
     private float timeSinceLastShot;
@@ -17,7 +18,7 @@ public class WeaponController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         unitDirection = this.gameObject.transform.forward.normalized;
-        shotPeriod = 1.0f / firerate;
+        shotPeriod = 1.0f / Firerate;
         DisableWeapon();
         timeSinceLastShot = 0.0f;
     }

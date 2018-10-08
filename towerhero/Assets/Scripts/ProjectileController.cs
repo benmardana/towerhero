@@ -30,4 +30,9 @@ public class ProjectileController : MonoBehaviour {
     public void setUnitVelocity(Vector3 unitVelocity) {
         this.unitVelocity = unitVelocity;
     }
+    
+    public Vector3 GetUnitVelocity()
+    {
+        return unitVelocity;
+    }
 }
