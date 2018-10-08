@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrailScript : MonoBehaviour
 {
 
-	public Transform ParentProjectile;
+	public Transform _parentProjectile;
 
 	private ParticleSystem _particleSystem;
 
@@ -18,6 +18,6 @@ public class TrailScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		_particleSystem.startRotation = ParentProjectile.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+		_particleSystem.startRotation = _parentProjectile.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
 	}
 }

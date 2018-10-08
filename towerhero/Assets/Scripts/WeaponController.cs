@@ -40,9 +40,11 @@ public class WeaponController : MonoBehaviour {
     public void Shoot() {
 
         // Instantiate a projectile
-        GameObject projectile = Instantiate<GameObject>(projectilePrefab);
-        projectile.transform.position = this.gameObject.transform.position;
-        projectile.GetComponent<ProjectileController>().setUnitVelocity(unitDirection);
+        Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation);
+        //GameObject projectile = Instantiate<GameObject>(projectilePrefab);
+//        projectile.transform.position = this.gameObject.transform.position;
+//        projectile.GetComponent<ProjectileController>().setUnitVelocity(unitDirection);
+//        projectile.transform.SetPositionAndRotation(this.gameObject.transform.position, this.gameObject.transform.rotation);
 
 
         // TODO (Optional) Smoke / etc effect visible at end of weapon barrel

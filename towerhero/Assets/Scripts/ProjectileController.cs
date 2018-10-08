@@ -6,13 +6,12 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour {
 
-    private Vector3 unitVelocity;
-
-    public float speed = 1.0f;
-    public int damageAmount = 50;
+    public float Speed = 1.0f;
+    public int DamageAmount = 50;
     
     void Update() {
-        this.gameObject.transform.Translate(unitVelocity * speed * Time.deltaTime);
+//        this.gameObject.transform.Translate(unitVelocity * speed * Time.deltaTime);
+        transform.position += Time.deltaTime * Speed * transform.forward;
     }
 
     // Handle collisions
@@ -20,19 +19,10 @@ public class ProjectileController : MonoBehaviour {
         if (col.gameObject.tag == "Enemy") {
             // Damage object with relevant tag
             EnemyHealth health = col.gameObject.GetComponent<EnemyHealth>();
-            health.DamageEnemy(damageAmount);
+            health.DamageEnemy(DamageAmount);
 
             // Destroy self (i.e. the projectile)
             Destroy(this.gameObject);
         }
-    }
-
-    public void setUnitVelocity(Vector3 unitVelocity) {
-        this.unitVelocity = unitVelocity;
-    }
-    
-    public Vector3 GetUnitVelocity()
-    {
-        return unitVelocity;
     }
 }
