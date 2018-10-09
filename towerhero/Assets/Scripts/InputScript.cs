@@ -92,7 +92,7 @@ public class InputScript : MonoBehaviour {
             // arbitrarily chose if you hold down t and click then that is a turret placement
             // TODO (Adam) - neaten up, too many nested for loops, is hard to understand
             // TODO (Adam) - comments
-            if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.T))
+            if (Input.GetKey(KeyCode.T) && Input.GetButtonDown("Fire1"))
             {
                 if (ResourceManager.resources >= 50)
                 {
@@ -113,7 +113,7 @@ public class InputScript : MonoBehaviour {
                 }
             }
 
-            if (Input.GetButtonDown("Fire1") && Input.GetKey(KeyCode.X))
+            if (Input.GetKey(KeyCode.X) && Input.GetButtonDown("Fire1"))
             {
                 RaycastHit hit;
 
