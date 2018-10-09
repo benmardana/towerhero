@@ -8,6 +8,7 @@ public class InputScript : MonoBehaviour {
 	CameraScript cameraScript;
     ClickController clickController;
     WeaponController weaponController;
+	public GameObject[] Turrets;
 
 	// assign all slave scripts in Start()
 	void Start () {
@@ -34,19 +35,20 @@ public class InputScript : MonoBehaviour {
             {
                 if (ResourceManager.resources >= 50)
                 {
-                    RaycastHit hit;
-
-                    if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-                    {
-                        if (hit.collider.tag == "Wall")
-                        {
-                            GameObject turret = (GameObject) Resources.Load("turret");
+	                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	                var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+	                foreach (var hit in hits)
+	                {
+		                if (hit.collider.tag == "Wall")
+		                {
+			                Debug.Log("Found the layer\n");
+                            GameObject turret = Turrets[0];
                             // This ensures the turret is loaded 'above' the wall.
                             Vector3 instantiationPoint = new Vector3(hit.point.x, hit.point.y + turret.transform.position.y, hit.point.z);
                             Instantiate(turret, instantiationPoint, Quaternion.identity);
                             ResourceManager.TurretBuilt();
-                        }
-                    }
+		                }
+	                }
                 }
             }
 

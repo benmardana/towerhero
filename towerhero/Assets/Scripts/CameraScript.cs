@@ -10,7 +10,7 @@ public class CameraScript : MonoBehaviour {
 
 	// pans camera around by rotating the central rig of the camera (note three part camera in unity)
 	public void HandlePan(){
-		Transform cam = GameObject.FindWithTag("CameraCentre").transform;
+		Transform cam = GameObject.FindWithTag("MainCamera").transform;
 		// rotates camera
 		cam.Rotate(-new Vector3(Input.GetAxis("Mouse Y") * speed, -Input.GetAxis("Mouse X") * speed, 0));
 

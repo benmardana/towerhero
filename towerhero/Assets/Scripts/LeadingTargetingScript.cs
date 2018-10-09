@@ -30,12 +30,17 @@ public class LeadingTargetingScript : MonoBehaviour {
 	void Start () {
 		UpdateTarget();
 		_shotSpeed = GetComponent<WeaponController>().projectilePrefab.GetComponent<ProjectileController>().Speed;
+		if (_target == null) return;
 		_prevPos = _target.transform.position;
 		_newPos = _target.transform.position;
+
 	}
 	
 	void FixedUpdate()
 	{
+		if (_target == null) {
+			return;
+		}
 		_newPos = _target.transform.position;  // each frame track the new position
 		_targetVelocity = (_newPos - _prevPos) / Time.fixedDeltaTime;  // velocity = dist/time
 		_prevPos = _newPos;  // update position for next frame calculation
