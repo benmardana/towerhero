@@ -1,12 +1,12 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class LevelController : MonoBehaviour {
-   
-	public Canvas gameOverScreen;
-	public int time = 5;
+
+    public const int ReloadWaitTime = 5;
+
+    public Canvas gameOverScreen;
 
     void Start () {
 	}
@@ -20,17 +20,38 @@ public class LevelController : MonoBehaviour {
 			// Coroutines enable you to delay or schedule actions
      		StartCoroutine(ReloadScene(loadedLevel));
 		}
+
+        // Continually monitors the wave number
+        if (GameState.waveNumber > GameState.FinalWave) {
+            LoadNextLevel();
+        }
 	}
 
-	IEnumerator ReloadScene(Scene level){
-		// wait for the set time
-		yield return new WaitForSeconds(time);
+    // Loads next level
+    // Note: Last level / "Success" screen should be titled in the same format
+    private void LoadNextLevel() {
+        GameState.LoadNextLevelState();
+        SceneManager.LoadScene("Scenes/Levels/Level_" + GameState.levelNumber + "/level_" + GameState.levelNumber);
+    }
+
+	IEnumerator ReloadScene(Scene level) {
+
+        // TODO - Prevent UI from updating (not working)
+        //GameObject canvasObject = (GameObject) GameObject.FindObjectOfType(typeof(Canvas));
+        //Text livesText = canvasObject.transform.Find("LivesText").GetComponent<Text>();
+        //livesText.enabled = false;
+
+        // Wait for the set time
+        yield return new WaitForSeconds(ReloadWaitTime);
+
+        //livesText.enabled = true;
+
         GameState.ResetGameState();
 		SceneManager.LoadScene (level.buildIndex);
 	}
 
     // for each enemy which gets to the goal, reduce lives
-    public void reduceLives(){
+    public void reduceLives() {
         GameState.lives -= 1;
 	}
 }

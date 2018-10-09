@@ -6,9 +6,10 @@ public class GameUIController : MonoBehaviour {
     public Text livesText;          // (lives remaining)
     public Text resourcesText;
     public Text waveText;
+    public Text levelText;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         Text[] texts = this.GetComponentsInChildren<Text>();
 
         foreach (Text text in texts) {
@@ -18,6 +19,8 @@ public class GameUIController : MonoBehaviour {
                 resourcesText = text;
             } else if (text.tag == "WaveText") {
                 waveText = text;
+            } else if (text.tag == "LevelText") {
+                levelText = text;
             }
         }
 	}
@@ -26,6 +29,7 @@ public class GameUIController : MonoBehaviour {
 	void Update () {
         livesText.text = "Lives: " + GameState.lives; 
         resourcesText.text = "Resources: " + ResourceManager.resources;             // TODO - requires resource manager (Adam)
-        waveText.text = "Waves: " + GameState.waveNumber;   // TODO - requires implementation of waves
+        waveText.text = "Wave: " + GameState.waveNumber;
+        levelText.text = "Level: " + GameState.levelNumber;
     }
 }

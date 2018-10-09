@@ -15,6 +15,7 @@ TagManager:
   - ResourcesText
   - WaveText
   - Wall
+  - LevelText
   layers:
   - Default
   - TransparentFX
