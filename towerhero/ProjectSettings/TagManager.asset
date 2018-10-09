@@ -16,6 +16,9 @@ TagManager:
   - WaveText
   - Wall
   - LevelText
+  - NonPlaceable
+  - Placeable
+  - Terrain
   layers:
   - Default
   - TransparentFX
