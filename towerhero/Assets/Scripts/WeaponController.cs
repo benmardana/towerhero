@@ -10,18 +10,16 @@ public class WeaponController : MonoBehaviour {
 
     public GameObject projectilePrefab;
     [FormerlySerializedAs("firerate")] public float Firerate;              // shots per second
-    private Vector3 unitDirection;     // direction the gun is aiming in
     private float shotPeriod;           // time between shots (in seconds)
     private float timeSinceLastShot;
     private bool weaponEnabled;         // if the weapon is actively shooting
 
 	// Use this for initialization
 	void Start () {
-        unitDirection = this.gameObject.transform.forward.normalized;
         shotPeriod = 1.0f / Firerate;
         DisableWeapon();
         timeSinceLastShot = 0.0f;
-    }
+	}
 
 	void Update () {
 
@@ -31,9 +29,6 @@ public class WeaponController : MonoBehaviour {
             Shoot();
             timeSinceLastShot = 0.0f;
         }
-
-        // Updating shooting direction
-        unitDirection = this.gameObject.transform.forward.normalized;
     }
 
     // Fire the weapon
@@ -41,10 +36,6 @@ public class WeaponController : MonoBehaviour {
 
         // Instantiate a projectile
         Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation);
-        //GameObject projectile = Instantiate<GameObject>(projectilePrefab);
-//        projectile.transform.position = this.gameObject.transform.position;
-//        projectile.GetComponent<ProjectileController>().setUnitVelocity(unitDirection);
-//        projectile.transform.SetPositionAndRotation(this.gameObject.transform.position, this.gameObject.transform.rotation);
 
 
         // TODO (Optional) Smoke / etc effect visible at end of weapon barrel

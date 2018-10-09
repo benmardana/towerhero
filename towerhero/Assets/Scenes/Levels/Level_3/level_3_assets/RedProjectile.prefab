@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 199661794396080864}
   - component: {fileID: 114282123859772092}
   - component: {fileID: 135140038524196248}
+  - component: {fileID: 54777342790679418}
   m_Layer: 0
   m_Name: RedProjectile
   m_TagString: Untagged
@@ -93,6 +94,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1786765437126332}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54777342790679418
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1786765437126332}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &114139411598172592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ff514577c0c4d3b96f0b18d01accb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parentProjectile: {fileID: 4548432324266142}
 --- !u!114 &114178048428065550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -126,8 +143,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d735a8832d0662f4b9b5050849334e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  damageAmount: 100
+  Speed: 10
+  DamageAmount: 30
+  EnemiesThreshold: 5
 --- !u!114 &114681078293952680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,7 +184,7 @@ ParticleSystem:
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
-  useRigidbodyForVelocity: 0
+  useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -220,7 +238,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 2
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -2121,7 +2139,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0

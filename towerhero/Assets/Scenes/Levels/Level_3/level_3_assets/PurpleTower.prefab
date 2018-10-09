@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 33318788293385236}
   - component: {fileID: 114696888350285950}
   - component: {fileID: 114070443432461756}
-  - component: {fileID: 114001957090263774}
+  - component: {fileID: 114742902971182358}
   m_Layer: 0
   m_Name: PurpleTurret
   m_TagString: Turret
@@ -1166,18 +1166,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0438704, y: 0.11513893, z: 0.23517638}
   m_Center: {x: -0.00000035762787, y: 0.00000022910535, z: -0.00000019744039}
---- !u!114 &114001957090263774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1519145828157466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be4ea3923daef3047a0b38f9cdc6ec4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTag: Enemy
 --- !u!114 &114070443432461756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1190,7 +1178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 12
-  rotationSpeed: 5
+  rotationSpeed: 10
 --- !u!114 &114118537009885336
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4034,6 +4022,18 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1415011853545554, guid: 633897f50f1214ef086c065e288e91dc,
     type: 2}
   Firerate: 1
+--- !u!114 &114742902971182358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519145828157466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b3a729185dd45af89420fda539df4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyTag: Enemy
 --- !u!114 &114771932134259056
 MonoBehaviour:
   m_ObjectHideFlags: 1
