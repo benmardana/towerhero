@@ -46,9 +46,9 @@ public class InputScript : MonoBehaviour {
 				_freezeTargetPosition = new Vector3(_freezeTargetPositionX, _freezeTargetPositionY, _freezeTargetPositionZ);
 				_freezeAbility.transform.position = _freezeTargetPosition;
 
-				if (Input.GetButtonDown("Fire1"))
+				if (Input.GetButtonDown("Fire1") && Cooldown.coolingDown == false)
 				{
-					
+                    Cooldown.coolingDown = true;
 					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 					foreach (var enemy in enemies)
 					{
