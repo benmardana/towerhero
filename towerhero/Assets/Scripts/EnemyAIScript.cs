@@ -15,7 +15,7 @@ public class EnemyAIScript : MonoBehaviour {
 		// do not amend angular speed or acceleration
 		// keep at 999 as shown in unity editor
 		// lower than that they get v confused in tight corners
-		_speed = AIAgent.speed = Random.Range(3f, 4f) * Options.enemyMovementSpeedMultiplier;
+		_speed = AIAgent.speed = Random.Range(1f, 2f) * Options.enemyMovementSpeedMultiplier;
 		goal = GameObject.FindWithTag("EnemyGoal");
 		Animate();
 	}

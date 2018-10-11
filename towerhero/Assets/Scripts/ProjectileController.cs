@@ -19,6 +19,7 @@ public class ProjectileController : MonoBehaviour {
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.tag == "Enemy") {
+            Debug.Log("Hit an Enemy!");
             // Damage object with relevant tag
             EnemyHealth health = col.gameObject.GetComponent<EnemyHealth>();
             health.DamageEnemy(DamageAmount);

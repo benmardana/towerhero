@@ -104,9 +104,10 @@ public class InputScript : MonoBehaviour {
 	                if (placeableHits.Any() && !nonPlaceableHits.Any())
 	                {
 		                var hit = terrainHits.First();
-		                Debug.Log(terrainHits.First().point);
-		                GameObject turret = Turrets[0];
-		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + turret.transform.position.y, hit.point.z);
+		                GameObject turret = Turrets[1];
+		                Transform obelisk = turret.transform.Find("Obelisk");
+		                float turretY = obelisk.GetComponent<BoxCollider>().bounds.min.y;
+		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + turretY, hit.point.z);
 		                Instantiate(turret, instantiationPoint, Quaternion.identity);
 		                ResourceManager.TurretBuilt();
 	                }
