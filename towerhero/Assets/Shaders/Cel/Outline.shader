@@ -35,7 +35,7 @@
 
 	SubShader
 	{		
-		Tags {"RenderType"="Opaque"}
+		Tags {"Queue" = "Transparent"}
 
 		// Rendering the Outline
 		Pass
