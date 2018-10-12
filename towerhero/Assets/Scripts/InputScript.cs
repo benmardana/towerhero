@@ -117,15 +117,10 @@ public class InputScript : MonoBehaviour {
 
 	                if (placeableHits.Any() && !nonPlaceableHits.Any())
 	                {
-		                var hit = terrainHits.First();
-		                GameObject turret = Turrets[0];
-		                if (Input.GetKey(KeyCode.Y))
-		                {
-			                turret = Turrets[1];
-		                }
-		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + turret.transform.position.y, hit.point.z);
-		                Instantiate(turret, instantiationPoint, Quaternion.identity);
-		                ResourceManager.TurretBuilt();
+
+		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + selectedTurret.transform.position.y, hit.point.z);
+		                Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
+		                ResourceManager.TurretBuilt(turretIndex);
 	                }
                 }
             }
@@ -138,7 +133,7 @@ public class InputScript : MonoBehaviour {
 	            if (turretHits.Any())
 	            {
 		            Destroy(turretHits.First().collider.gameObject);
-		            ResourceManager.ReturnResources();
+		            ResourceManager.ReturnResources(turretIndex);
 	            }
             }
 
