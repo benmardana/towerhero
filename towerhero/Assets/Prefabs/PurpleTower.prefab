@@ -139,9 +139,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4817639134560290}
+  - component: {fileID: 65193361983534592}
+  - component: {fileID: 54639943312242342}
   m_Layer: 0
   m_Name: PurpleTower
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -452,7 +454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1400946923793242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 26.513863, y: -0.7, z: -20.745445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4869528222446774}
@@ -1022,6 +1024,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1514194037639294}
   m_Mesh: {fileID: 0}
+--- !u!54 &54639943312242342
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400946923793242}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65088933288318026
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1046,6 +1063,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0438704, y: 0.11513893, z: 0.23517638}
   m_Center: {x: -0.00000023841858, y: -0.000000057742, z: 0.00000037625432}
+--- !u!65 &65193361983534592
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400946923793242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6094494, y: 4.448861, z: 0.68226814}
+  m_Center: {x: -1.4260283, y: 1.7244306, z: -0.027215004}
 --- !u!65 &65486760989859046
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -5081,9 +5110,17 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 0d000000
+  m_SelectedEdges:
+  - x: 68
+    y: 69
+  - x: 69
+    y: 70
+  - x: 70
+    y: 71
+  - x: 71
+    y: 68
+  m_selectedTriangles: 440000004500000046000000440000004600000047000000
 --- !u!114 &114917413561701188
 MonoBehaviour:
   m_ObjectHideFlags: 1

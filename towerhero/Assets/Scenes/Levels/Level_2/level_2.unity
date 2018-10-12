@@ -411,7 +411,7 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialType: 0
+  m_MaterialType: 1
   m_LegacySpecular:
     serializedVersion: 2
     rgba: 4286545791
@@ -3295,18 +3295,6 @@ Prefab:
     - target: {fileID: 400000, guid: 542d7c37f23d45943b95bb9c360947a4, type: 2}
       propertyPath: m_RootOrder
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 542d7c37f23d45943b95bb9c360947a4, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.19500001
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 542d7c37f23d45943b95bb9c360947a4, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.19500002
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 542d7c37f23d45943b95bb9c360947a4, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.19500002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 542d7c37f23d45943b95bb9c360947a4, type: 2}

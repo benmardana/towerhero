@@ -117,26 +117,29 @@ public class InputScript : MonoBehaviour {
 
 	                if (placeableHits.Any() && !nonPlaceableHits.Any())
 	                {
-		                Debug.Log(terrainHits.First().point);
-		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + selectedTurret.transform.position.y, hit.point.z);
-                        Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
-		                ResourceManager.TurretBuilt(turretIndex);
+		                var hit = terrainHits.First();
+		                GameObject turret = Turrets[0];
+		                if (Input.GetKey(KeyCode.Y))
+		                {
+			                turret = Turrets[1];
+		                }
+		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + turret.transform.position.y, hit.point.z);
+		                Instantiate(turret, instantiationPoint, Quaternion.identity);
+		                ResourceManager.TurretBuilt();
 	                }
                 }
             }
 
             if (Input.GetKey(KeyCode.X) && Input.GetButtonDown("Fire1"))
             {
-                RaycastHit hit;
-
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-                {
-                    if (hit.collider.tag == "Turret" || hit.collider.tag == "Bridge")
-                    {
-                        Destroy(hit.collider.gameObject);
-                        ResourceManager.ReturnResources(turretIndex);
-                    }
-                }
+	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+	            var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+	            var turretHits = hits.Where(x => x.collider.CompareTag("Turret"));
+	            if (turretHits.Any())
+	            {
+		            Destroy(turretHits.First().collider.gameObject);
+		            ResourceManager.ReturnResources();
+	            }
             }
 
         }
