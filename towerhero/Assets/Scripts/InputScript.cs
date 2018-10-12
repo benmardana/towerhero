@@ -3,33 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
-
+using UnityEngine.UI;
 public class InputScript : MonoBehaviour {
     
 	CameraScript cameraScript;
     ClickController clickController;
     WeaponController weaponController;
 	public GameObject[] Turrets;
+    private GameObject selectedTurret;
+    private String turretIndex;
 
 	private GameObject _freezeAbility;
 	private Light _freezeTarget;
 	private MeshCollider _targetArea;
+    public Button _purpleButton;
+    public Button _redButton;
 
-	// assign all slave scripts in Start()
-	void Start () {
+
+    // assign all slave scripts in Start()
+    void Start () {
 		cameraScript = GetComponent<CameraScript>();
         clickController = GetComponent<ClickController>();      // TODO - not being used?
 		_freezeAbility = GameObject.Find("FreezeAbility");
 		_freezeTarget = _freezeAbility.GetComponent<Light>();
 		_freezeTarget.enabled = false;
 		_targetArea = _freezeAbility.GetComponentInChildren<MeshCollider>();
-	}
+        _purpleButton.onClick.AddListener(ToggleTurretPurple);
+        _redButton.onClick.AddListener(ToggleTurretRed);
+
+        turretIndex = "Purple";
+        selectedTurret = Turrets[0];
+
+       
+    }
 	
 	public void Update () {
 
 		// Player Ability highlighting area of effect
-		if (Input.GetKey(KeyCode.E))
+		if (Input.GetKey(KeyCode.E) && Cooldown.coolingDown == false)
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
@@ -48,7 +59,7 @@ public class InputScript : MonoBehaviour {
 
 				if (Input.GetButtonDown("Fire1"))
 				{
-					
+                    Cooldown.coolingDown = true;
 					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 					foreach (var enemy in enemies)
 					{
@@ -94,13 +105,16 @@ public class InputScript : MonoBehaviour {
             // TODO (Adam) - comments
             if (Input.GetKey(KeyCode.T) && Input.GetButtonDown("Fire1"))
             {
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+                var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
+                var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
+                var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
+                var hit = terrainHits.First();
+
                 if (ResourceManager.resources >= 50)
                 {
-	                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	                var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
-	                var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
-	                var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
-	                var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
+
 	                if (placeableHits.Any() && !nonPlaceableHits.Any())
 	                {
 		                var hit = terrainHits.First();
@@ -121,7 +135,6 @@ public class InputScript : MonoBehaviour {
 	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 	            var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
 	            var turretHits = hits.Where(x => x.collider.CompareTag("Turret"));
-
 	            if (turretHits.Any())
 	            {
 		            Destroy(turretHits.First().collider.gameObject);
@@ -132,4 +145,16 @@ public class InputScript : MonoBehaviour {
         }
 
 	}
+
+    public void ToggleTurretRed()
+    {
+        turretIndex = "Red";
+        selectedTurret = Turrets[1];
+    }
+
+    public void ToggleTurretPurple()
+    {
+        turretIndex = "Purple";
+        selectedTurret = Turrets[0];
+    }
 }

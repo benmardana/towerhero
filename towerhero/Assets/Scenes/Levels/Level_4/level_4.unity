@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 493bfb50af5d9424da505ba945c86600, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.0006983695, g: 0.0010749076, b: 0.42018375, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -457,6 +457,57 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: e3b35ed9f7252f345b14d93707f1df90,
+        type: 3}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_FontData.m_LineSpacing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9990684
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_Text
+      value: Congratulations Xou Win!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743546400096868, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_FontData.m_MaxSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 224105170198770472, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 224105170198770472, guid: f7e89c2171cd0504bb0a3ef2e484b94c,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 820.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f7e89c2171cd0504bb0a3ef2e484b94c, type: 2}
