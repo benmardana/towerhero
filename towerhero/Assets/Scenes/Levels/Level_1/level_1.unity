@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Turrets: []
+  cuntCanvas: {fileID: 0}
 --- !u!43 &208706687
 Mesh:
   m_ObjectHideFlags: 0
