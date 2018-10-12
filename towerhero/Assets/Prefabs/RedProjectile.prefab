@@ -60,7 +60,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1786765437126332}
   m_LocalRotation: {x: -0, y: -9.406794e-10, z: -0.000000021052417, w: 1}
-  m_LocalPosition: {x: 1.3611593, y: 2.7352526, z: 1.1201086}
+  m_LocalPosition: {x: 73.12276, y: -0.5249999, z: -3.8666115}
   m_LocalScale: {x: 0.36406946, y: 0.35000017, z: 0.3640696}
   m_Children:
   - {fileID: 4686301160618416}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  DamageAmount: 30
+  DamageAmount: 100
   EnemiesThreshold: 5
 --- !u!114 &114681078293952680
 MonoBehaviour:
@@ -164,7 +164,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1786765437126332}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 3.9335682
@@ -248,7 +248,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4711,7 +4711,7 @@ ParticleSystem:
   simulationSpeed: 1
   stopAction: 0
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4779,7 +4779,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4832,7 +4832,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5352,7 +5352,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 3
+      value: 5.4
       mode: 0
       spread: 0
       speed:
@@ -5471,7 +5471,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 50
+      scalar: 600
       minScalar: 10
       maxCurve:
         serializedVersion: 2

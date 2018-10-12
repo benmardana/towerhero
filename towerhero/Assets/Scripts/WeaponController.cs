@@ -12,8 +12,8 @@ public class WeaponController : MonoBehaviour {
     [FormerlySerializedAs("firerate")] public float Firerate;              // shots per second
     private float shotPeriod;           // time between shots (in seconds)
     private float timeSinceLastShot;
-    private bool weaponEnabled;         // if the weapon is actively shooting
-
+    private bool weaponEnabled;
+    
 	// Use this for initialization
 	void Start () {
         shotPeriod = 1.0f / Firerate;
