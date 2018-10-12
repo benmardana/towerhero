@@ -977,22 +977,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 28
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: da44e912b6d3afe4b91a3f60c09e5d50, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 2.3000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: da44e912b6d3afe4b91a3f60c09e5d50, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 2.2999997
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: da44e912b6d3afe4b91a3f60c09e5d50, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 2.2999997
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: da44e912b6d3afe4b91a3f60c09e5d50, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -66.864006
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: da44e912b6d3afe4b91a3f60c09e5d50, type: 2}
   m_IsPrefabParent: 0
@@ -1888,10 +1872,6 @@ Prefab:
     - target: {fileID: 400000, guid: 9de8e7e457b42364c8849a76dbbb9554, type: 2}
       propertyPath: m_RootOrder
       value: 71
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 9de8e7e457b42364c8849a76dbbb9554, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -7.945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9de8e7e457b42364c8849a76dbbb9554, type: 2}
@@ -9143,26 +9123,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 66
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.6999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 3.098
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -1.7270001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 202bfb8de22cca14aaedfe063a59625e, type: 2}
   m_IsPrefabParent: 0
@@ -10466,7 +10426,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1966
+  m_Name: pb_Mesh-1084
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11145,7 +11105,7 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialType: 0
+  m_MaterialType: 1
   m_LegacySpecular:
     serializedVersion: 2
     rgba: 4286545791
@@ -11284,21 +11244,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 80
       objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4c7239da0150d274da8284c8748ae82e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 31.026001
-      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 4c7239da0150d274da8284c8748ae82e, type: 2}
       propertyPath: m_Name
       value: WoodenPlank_1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4c7239da0150d274da8284c8748ae82e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -4.493
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 4c7239da0150d274da8284c8748ae82e, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c7239da0150d274da8284c8748ae82e, type: 2}
