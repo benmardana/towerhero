@@ -1,4 +1,4 @@
-﻿Shader "Toon/Outline"
+﻿Shader "CustomOutlineShader"
 {
 	Properties
 	{

@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.SceneManagement;
 
 public static class GameState
 {
     public const int StartingLives = 30;
     public const int StartingWave = 1;
     public const int FinalWave = 5;
-    public const int StartingLevel = 1;
+    public const int StartingLevel = 3;     // Starting level number - NOT called from MainMenuScene
     public const int FinalLevel = 3;
 
     public static int lives = StartingLives;  // number of lives (remaining), per level	
@@ -32,7 +30,7 @@ public static class GameState
     }
 
     // Should get called when a new level is loaded
-    public static void LoadNextLevelState()
+    public static void SetNextLevelState()
     {
         ResetLives();
         ResetWaveNumber();
@@ -43,8 +41,6 @@ public static class GameState
             // TODO - Ensure that last level is loaded
         }
     }
-
-
 
     public static void ResetGameState()
     {
