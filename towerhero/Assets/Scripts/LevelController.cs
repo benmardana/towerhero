@@ -27,11 +27,16 @@ public class LevelController : MonoBehaviour {
         }
 	}
 
+    // Load the level currently SET in GameState
+    public static void LoadCurrentLevel() {
+        SceneManager.LoadScene("Scenes/Levels/Level_" + GameState.levelNumber + "/level_" + GameState.levelNumber);
+    }
+
     // Loads next level
     // Note: Last level / "Success" screen should be titled in the same format
-    private void LoadNextLevel() {
-        GameState.LoadNextLevelState();
-        SceneManager.LoadScene("Scenes/Levels/Level_" + GameState.levelNumber + "/level_" + GameState.levelNumber);
+    public static void LoadNextLevel() {
+        GameState.SetNextLevelState();
+        LoadCurrentLevel();
     }
 
 	IEnumerator ReloadScene(Scene level) {
