@@ -18,6 +18,8 @@ public class InputScript : MonoBehaviour {
 	private MeshCollider _targetArea;
     public Button _purpleButton;
     public Button _redButton;
+	public int FreezeAbilityModifier = 10;
+	public int FreezeAbilityDuration = 5;
 
 
     // assign all slave scripts in Start()
@@ -61,14 +63,15 @@ public class InputScript : MonoBehaviour {
 				{
                     Cooldown.coolingDown = true;
 					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+					Debug.Log(enemies.Length);
 					foreach (var enemy in enemies)
 					{
-						var eCollider = enemy.GetComponent<CapsuleCollider>();
-						if (_targetArea.bounds.Intersects(eCollider.bounds))
+						var eCollider = enemy.GetComponent<MeshCollider>();
+						if ((eCollider != null) && _targetArea.bounds.Intersects(eCollider.bounds))
 						{
 							// slows down targets
 							// SlowDown(multiplier, duration)
-							enemy.GetComponent<EnemyAIScript>().SlowDown(2, 5);
+							enemy.GetComponent<EnemyAIScript>().SlowDown(FreezeAbilityModifier, FreezeAbilityDuration);
 						}
 					}
 					
