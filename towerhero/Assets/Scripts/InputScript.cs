@@ -63,7 +63,6 @@ public class InputScript : MonoBehaviour {
 				{
                     Cooldown.coolingDown = true;
 					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-					Debug.Log(enemies.Length);
 					foreach (var enemy in enemies)
 					{
 						var eCollider = enemy.GetComponent<MeshCollider>();
