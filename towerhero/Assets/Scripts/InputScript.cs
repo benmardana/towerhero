@@ -12,24 +12,36 @@ public class InputScript : MonoBehaviour {
 	public GameObject[] Turrets;
     private GameObject selectedTurret;
     private String turretIndex;
+	
+	public Button _purpleButton;
+	public Button _redButton;
 
 	private GameObject _freezeAbility;
 	private Light _freezeTarget;
-	private MeshCollider _targetArea;
-    public Button _purpleButton;
-    public Button _redButton;
+	private MeshCollider _FreezeTargetArea;
 	public int FreezeAbilityModifier = 10;
 	public int FreezeAbilityDuration = 5;
+	
+	
+	private GameObject _greenFlameAbility;
+	private Light _greenFlameTarget;
+	private MeshCollider _greenFlameTargetArea;
 
 
-    // assign all slave scripts in Start()
+	// assign all slave scripts in Start()
     void Start () {
 		cameraScript = GetComponent<CameraScript>();
         clickController = GetComponent<ClickController>();      // TODO - not being used?
+	    
 		_freezeAbility = GameObject.Find("FreezeAbility");
 		_freezeTarget = _freezeAbility.GetComponent<Light>();
 		_freezeTarget.enabled = false;
-		_targetArea = _freezeAbility.GetComponentInChildren<MeshCollider>();
+		_FreezeTargetArea = _freezeAbility.GetComponentInChildren<MeshCollider>();
+	    
+	    _greenFlameAbility = GameObject.Find("GreenFireAbility");
+	    _greenFlameTarget = _greenFlameAbility.GetComponent<Light>();
+	    _greenFlameTarget.enabled = false;
+	    
         _purpleButton.onClick.AddListener(ToggleTurretPurple);
         _redButton.onClick.AddListener(ToggleTurretRed);
 
@@ -41,7 +53,7 @@ public class InputScript : MonoBehaviour {
 	
 	public void Update () {
 
-		// Player Ability highlighting area of effect
+		// Freeze Ability
 		if (Input.GetKey(KeyCode.E) && Cooldown.coolingDown == false)
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,7 +78,7 @@ public class InputScript : MonoBehaviour {
 					foreach (var enemy in enemies)
 					{
 						var eCollider = enemy.GetComponent<MeshCollider>();
-						if ((eCollider != null) && _targetArea.bounds.Intersects(eCollider.bounds))
+						if ((eCollider != null) && _FreezeTargetArea.bounds.Intersects(eCollider.bounds))
 						{
 							// slows down targets
 							// SlowDown(multiplier, duration)
@@ -84,6 +96,43 @@ public class InputScript : MonoBehaviour {
 		else
 		{
 			_freezeTarget.enabled = false;
+		}
+		
+		// Green Flame Ability
+		if (Input.GetKey(KeyCode.R) && Cooldown.coolingDown == false)
+		{
+			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
+			
+			if (terrainHits.Any())
+			{
+				var hit = terrainHits.First();
+				_greenFlameTarget.enabled = true;
+				var greenFlameTargetPosition = _greenFlameAbility.transform.position;
+				var greenFlameTargetPositionY = greenFlameTargetPosition.y;
+				var greenFlameTargetPositionX = hit.point.x;
+				var greenFlameTargetPositionZ = hit.point.z;
+				greenFlameTargetPosition = new Vector3(greenFlameTargetPositionX, greenFlameTargetPositionY, greenFlameTargetPositionZ);
+				_greenFlameAbility.transform.position = greenFlameTargetPosition;
+
+				if (Input.GetButtonDown("Fire1"))
+				{
+					var greenCannons = _greenFlameAbility.GetComponentsInChildren<FireAbilityScript>();
+					foreach (var cannon in greenCannons)
+					{
+						cannon.Spray();
+					}
+				}
+			}
+			else
+			{
+				_greenFlameTarget.enabled = false;
+			}
+		}
+		else
+		{
+			_greenFlameTarget.enabled = false;
 		}
 		
 		// if input is detected
