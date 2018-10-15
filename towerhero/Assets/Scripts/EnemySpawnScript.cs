@@ -1,81 +1,83 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawnScript : MonoBehaviour {
+	
+	public Transform[] EnemyUnits;
+	public int Waves;
+	private int _waveCount = 1;
+	
+	public int SecondsBetweenWaves;
+	
+	public int EnemyGroupsPerWave;
+	private int _enemyGroupsPerWaveCount = 0;
+	
+	public int SecondsBetweenGroupsInWave;
 
-    private const int InitNumberOfGroups = 3;
-    private const float TimeBetweenWaves = 15f;
+	private bool _paused = false;
 
-	public float groupSpawnPeriod = 5.0f;
-
-	private int numberOfGroups = InitNumberOfGroups + GameState.waveNumber;
-	private int numberOfGroupsSpawned = 0;    
-
-	// list enables multiple enemy prefabs to be dropped in for larger crowds
-	// doing more than 2 can cause some clipping issues though
-    // Note: Units dropped in via the editor
-    // Note2: Number of enemies spawned per wave == enemyUnits.length() * numberOfGroups
-	public Transform[] enemyUnits;
-
-	// After 1 second, begin spawning enemies at regular intervals
-	void Start () {
-		InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriod);
+	// Use this for initialization
+	void Start ()
+	{
+		// start spawning groups
+		InvokeRepeating("SpawnWave", 1.0f, SecondsBetweenGroupsInWave);
 	}
 	
-	void Update () {
+	// Update is called once per frame
+	void Update ()
+	{
+		GameState.waveNumber = _waveCount;
 
-		// if numberOfGroups groups been spawned, stop spawning any more
-		if (numberOfGroupsSpawned >= numberOfGroups) {
-            // Stop all active Spawn() coroutines
-            StopAllCoroutines();
-
-            // Stop the current wave
-            numberOfGroupsSpawned = 0;
-            CancelInvoke("SpawnEnemies");
-            StartCoroutine(Pause());
-
+		// if we've spawned enough per group
+		if (!_paused && _enemyGroupsPerWaveCount >= EnemyGroupsPerWave)
+		{
+			// pause the spawning
+			_paused = true;
+			StartCoroutine(Pause());
+		}
+		
+		// if we've spawned all of the waves
+		if (_waveCount > Waves)
+		{
+			// cancel any lingering invokes and coroutines to prevent async calls to spawn more enemies
+			CancelInvoke();
+			StopAllCoroutines();
+		}
+	}
+	
+	IEnumerator Pause() {
+		// stop spawning any enemies
+		CancelInvoke();
+		// wait
+		yield return new WaitForSeconds(SecondsBetweenWaves);
+		// continue spawning enemies
+		if (_waveCount < Waves)
+		{
+			InvokeRepeating("SpawnWave", 0.0f, SecondsBetweenGroupsInWave);
+			_waveCount++;
+			_enemyGroupsPerWaveCount = 0;
+			_paused = false;
 		}
 	}
 
-    // move to the next wave after waiting
-    IEnumerator Pause() {
-        yield return new WaitForSeconds(TimeBetweenWaves);
-        InvokeRepeating("SpawnEnemies", 1.0f, groupSpawnPeriod);
-        GameState.waveNumber++;
-    }
-
-    public void resetNumberOfGroupsSpawned() {
-        numberOfGroupsSpawned = 0;
-    }
-
-	void SpawnEnemies() {
-		StartCoroutine(Spawn());
+	void SpawnWave()
+	{
+		SpawnEnemyGroup();
+		_enemyGroupsPerWaveCount++;
 	}
 
-	// spawns enemies every second
-    // (runs through and starts another coroutine before dieing)
-	IEnumerator Spawn() {
-		yield return new WaitForSeconds(1f);
-        numberOfGroupsSpawned++;
-		SpawnEnemy();
-		StartCoroutine(Spawn());
-	}
-
-	// will spawn enemies at random points in a given bounding box
-	// strictly only works on regular quadrilateral boxes
-	void SpawnEnemy() {
-		foreach(Transform enemy in enemyUnits) {
-			Vector3 spawnPoint = RandomPointInXZBounds(this.GetComponent<MeshCollider>().bounds);
+	void SpawnEnemyGroup() {
+		foreach(Transform enemy in EnemyUnits) {
+			Vector3 spawnPoint = RandomPointInXZBounds(GetComponent<MeshCollider>().bounds);
 			Instantiate(enemy, spawnPoint, Quaternion.identity);
 		}		
 	}
 
-	public static Vector3 RandomPointInXZBounds(Bounds bounds) {
-        return new Vector3(
-            Random.Range(bounds.min.x, bounds.max.x),
-            0,
-            Random.Range(bounds.min.z, bounds.max.z)
-        );
-    }
+	static Vector3 RandomPointInXZBounds(Bounds bounds) {
+		return new Vector3(
+			Random.Range(bounds.min.x, bounds.max.x),
+			0,
+			Random.Range(bounds.min.z, bounds.max.z)
+		);
+	}
 }
