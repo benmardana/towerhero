@@ -1,9 +1,9 @@
 ﻿public static class GameState
 {
-    public const int StartingLives = 30;
+    public const int StartingLives = 10;
     public const int StartingWave = 1;
     public const int FinalWave = 5;
-    public const int StartingLevel = 3;     // Starting level number - NOT called from MainMenuScene
+    public const int StartingLevel = 1;     // Starting level number - NOT called from MainMenuScene
     public const int FinalLevel = 3;
 
     public static int lives = StartingLives;  // number of lives (remaining), per level	

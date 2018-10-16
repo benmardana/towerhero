@@ -39,8 +39,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1175478870336296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.197136, y: 1.221439, z: 11.96851}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 19.75, y: 3.39, z: 4.41}
+  m_LocalScale: {x: 1.0155191, y: 1.4, z: 1.8104398}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -410,8 +410,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29549acc2907442139213b26f9dc5ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groupSpawnPeriodS: 10
-  groupSize: 5
-  enemyUnits:
-  - {fileID: 4845166947014280, guid: 68b589a64a63d4ed887208842195589a, type: 2}
-  - {fileID: 4845166947014280, guid: 68b589a64a63d4ed887208842195589a, type: 2}
+  EnemyUnits:
+  - {fileID: 4328241616467092, guid: e1eedcdbb3f634d20aaf247c46bf52dc, type: 2}
+  SecondsBetweenWaves: 8
+  EnemyGroupsPerWave: 4
+  SecondsBetweenGroupsInWave: 1
