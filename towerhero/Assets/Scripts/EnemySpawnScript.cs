@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public class EnemySpawnScript : MonoBehaviour {
-	
+	private int _waves = GameState.FinalWave;
 	public Transform[] EnemyUnits;
 	private int _waveCount = 1;
 	
@@ -36,7 +36,7 @@ public class EnemySpawnScript : MonoBehaviour {
 		}
 		
 		// if we've spawned all of the waves
-		if (_waveCount > GameState.FinalLevel)
+		if (_waveCount > _waves)
 		{
 			// cancel any lingering invokes and coroutines to prevent async calls to spawn more enemies
 			CancelInvoke();
@@ -50,7 +50,7 @@ public class EnemySpawnScript : MonoBehaviour {
 		// wait
 		yield return new WaitForSeconds(SecondsBetweenWaves);
 		// continue spawning enemies
-		if (_waveCount < GameState.FinalLevel)
+		if (_waveCount < _waves)
 		{
 			InvokeRepeating("SpawnWave", 0.0f, SecondsBetweenGroupsInWave);
 			_waveCount++;
