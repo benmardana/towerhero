@@ -36,12 +36,11 @@ public class EnemySpawnScript : MonoBehaviour {
 		}
 		
 		// if we've spawned all of the waves
-		if (_waveCount >= _waves)
+		if (_waveCount > _waves)
 		{
             // cancel any lingering invokes and coroutines to prevent async calls to spawn more enemies
             CancelInvoke();
 			StopAllCoroutines();
-            _waveCount++;
             
         }
 	}

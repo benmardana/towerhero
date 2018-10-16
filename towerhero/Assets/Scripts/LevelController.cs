@@ -7,11 +7,14 @@ public class LevelController : MonoBehaviour {
     public const int ReloadWaitTime = 5;
 
     public Canvas gameOverScreen;
+	private int _enemiesInScene;
 
     void Start () {
 	}
 	
-	void Update () {
+	void Update ()
+	{
+		_enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy").Length;
 		if (GameState.lives <= 0){
 			// Load up Game Over Screen
 			Instantiate(gameOverScreen);
@@ -22,7 +25,7 @@ public class LevelController : MonoBehaviour {
 		}
 
         // Continually monitors the wave number
-        if (GameState.waveNumber > GameState.FinalWave) {
+        if ((_enemiesInScene == 0) && (GameState.waveNumber >= GameState.FinalWave)) {
             LoadNextLevel();
         }
 	}
