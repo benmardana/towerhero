@@ -144,8 +144,6 @@ public class InputScript : MonoBehaviour {
 			// TODO
 		}
 
-
-		var towerHit  =new RaycastHit();
 		
 		// place turret selected
 		if (Input.GetButton("Fire1"))
@@ -158,24 +156,35 @@ public class InputScript : MonoBehaviour {
 			
 			if (placeableHits.Any() && !nonPlaceableHits.Any())
 			{
-				towerHit = terrainHits.First();
+				var hit = terrainHits.First();
 				_towerTarget.enabled = true;
 				_towerTarget.color = turretIndex == "Red" ? Color.red : Color.magenta;
 				var _towerTargetPosition = _freezeAbility.transform.position;
 				var _towerTargetPositionY = _towerTargetPosition.y;
-				var _towerTargetPositionX = towerHit.point.x;
-				var _towerTargetPositionZ = towerHit.point.z;
+				var _towerTargetPositionX = hit.point.x;
+				var _towerTargetPositionZ = hit.point.z;
 				_towerTargetPosition = new Vector3(_towerTargetPositionX, _towerTargetPositionY, _towerTargetPositionZ);
 				_towerTracker.transform.position = _towerTargetPosition;
 			}
 		}
-		else
+		if (Input.GetButtonUp("Fire1"))
 		{
+			_towerTarget.enabled = false;
+			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
+			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
+			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
+			var hit = terrainHits.First();
 			if (ResourceManager.resources >= 50)
 			{
-				Vector3 instantiationPoint = new Vector3(towerHit.point.x + 1.6f, towerHit.point.y + selectedTurret.transform.position.y, towerHit.point.z);
-				Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
-				ResourceManager.TurretBuilt(turretIndex);
+				if (placeableHits.Any() && !nonPlaceableHits.Any())
+				{
+					Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
+						hit.point.y + selectedTurret.transform.position.y, hit.point.z);
+					Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
+					ResourceManager.TurretBuilt(turretIndex);
+				}
 			}
 		}
 
