@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // TODO - Adam, I've only done some base stuff so that I can make the targeting controller
 public class TurretController : MonoBehaviour {

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class Options {
+﻿public static class Options {
 
     public const float MinDifficulty = 0.0f;
 

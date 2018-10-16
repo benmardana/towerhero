@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public static class ResourceManager {
+﻿public static class ResourceManager {
 
     public const int StartingResources = 200;
     public const int EnemyKilledResources = 5;
