@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class InputScript : MonoBehaviour {
     
-	CameraScript cameraScript;
     ClickController clickController;
     WeaponController weaponController;
 	public GameObject[] Turrets;
@@ -25,11 +24,13 @@ public class InputScript : MonoBehaviour {
 	private GameObject _greenFlameAbility;
 	private Light _greenFlameTarget;
 	private MeshCollider _greenFlameTargetArea;
+	
+	private GameObject _towerTracker;
+	private Light _towerTarget;
 
 
 	// assign all slave scripts in Start()
     void Start () {
-		cameraScript = GetComponent<CameraScript>();
 	    
 		_freezeAbility = GameObject.Find("FreezeAbility");
 		_freezeTarget = _freezeAbility.GetComponent<Light>();
@@ -39,6 +40,9 @@ public class InputScript : MonoBehaviour {
 	    _greenFlameAbility = GameObject.Find("GreenFireAbility");
 	    _greenFlameTarget = _greenFlameAbility.GetComponent<Light>();
 	    _greenFlameTarget.enabled = false;
+
+	    _towerTracker = GameObject.Find("TowerTracker");
+	    _towerTarget = _towerTracker.GetComponent<Light>();
 	    
         _purpleButton.onClick.AddListener(ToggleTurretPurple);
         _redButton.onClick.AddListener(ToggleTurretRed);
@@ -135,57 +139,58 @@ public class InputScript : MonoBehaviour {
 		
 		// if input is detected
 		// check what it is then call the relevant function from the slave script
-		// TODO - not sure this method is best practice. can refactor later though. optimisation not too important rn.
-		if (Input.anyKey) {
-			if(Input.GetKey(KeyCode.Mouse1)) {
-				// pan camera
-				cameraScript.HandlePan();
-         	}
-            if (Input.GetKey(KeyCode.Escape)) {
-                // pause menu camera
-                // TODO
-            }
-	
+		if (Input.GetKey(KeyCode.Escape)) {
+			// pause menu camera
+			// TODO
+		}
 
 
+		var towerHit  =new RaycastHit();
+		
+		// place turret selected
+		if (Input.GetButton("Fire1"))
+		{
+			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
+			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
+			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
 			
-			// place turret selected
-            if (Input.GetButtonDown("Fire1"))
-            {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
-                var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
-                var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
-                var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-                var hit = terrainHits.First();
+			if (placeableHits.Any() && !nonPlaceableHits.Any())
+			{
+				towerHit = terrainHits.First();
+				_towerTarget.enabled = true;
+				_towerTarget.color = turretIndex == "Red" ? Color.red : Color.magenta;
+				var _towerTargetPosition = _freezeAbility.transform.position;
+				var _towerTargetPositionY = _towerTargetPosition.y;
+				var _towerTargetPositionX = towerHit.point.x;
+				var _towerTargetPositionZ = towerHit.point.z;
+				_towerTargetPosition = new Vector3(_towerTargetPositionX, _towerTargetPositionY, _towerTargetPositionZ);
+				_towerTracker.transform.position = _towerTargetPosition;
+			}
+		}
+		else
+		{
+			if (ResourceManager.resources >= 50)
+			{
+				Vector3 instantiationPoint = new Vector3(towerHit.point.x + 1.6f, towerHit.point.y + selectedTurret.transform.position.y, towerHit.point.z);
+				Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
+				ResourceManager.TurretBuilt(turretIndex);
+			}
+		}
 
-                if (ResourceManager.resources >= 50)
-                {
-
-	                if (placeableHits.Any() && !nonPlaceableHits.Any())
-	                {
-
-		                Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f, hit.point.y + selectedTurret.transform.position.y, hit.point.z);
-		                Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
-		                ResourceManager.TurretBuilt(turretIndex);
-	                }
-                }
-            }
-	
-			// delete turret
-            if (Input.GetKey(KeyCode.X) && Input.GetButtonDown("Fire1"))
-            {
-	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-	            var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
-	            var turretHits = hits.Where(x => x.collider.CompareTag("Turret"));
-	            if (turretHits.Any())
-	            {
-		            Destroy(turretHits.First().collider.gameObject);
-		            ResourceManager.ReturnResources(turretIndex);
-	            }
-            }
-
-        }
+		// delete turret
+		if (Input.GetKey(KeyCode.X) && Input.GetButtonDown("Fire1"))
+		{
+			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
+			var turretHits = hits.Where(x => x.collider.CompareTag("Turret"));
+			if (turretHits.Any())
+			{
+				Destroy(turretHits.First().collider.gameObject);
+				ResourceManager.ReturnResources(turretIndex);
+			}
+		}
 
 	}
 
