@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 20
-  DamageAmount: 100
+  DamageAmount: 50
   EnemiesThreshold: 1
 --- !u!114 &114422506281618084
 MonoBehaviour:
