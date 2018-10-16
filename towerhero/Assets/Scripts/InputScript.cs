@@ -30,7 +30,6 @@ public class InputScript : MonoBehaviour {
 	// assign all slave scripts in Start()
     void Start () {
 		cameraScript = GetComponent<CameraScript>();
-        clickController = GetComponent<ClickController>();      // TODO - not being used?
 	    
 		_freezeAbility = GameObject.Find("FreezeAbility");
 		_freezeTarget = _freezeAbility.GetComponent<Light>();
@@ -150,10 +149,8 @@ public class InputScript : MonoBehaviour {
 
 
 			
-            // arbitrarily chose if you hold down t and click then that is a turret placement
-            // TODO (Adam) - neaten up, too many nested for loops, is hard to understand
-            // TODO (Adam) - comments
-            if (Input.GetKey(KeyCode.T) && Input.GetButtonDown("Fire1"))
+			// place turret selected
+            if (Input.GetButtonDown("Fire1"))
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
@@ -174,7 +171,8 @@ public class InputScript : MonoBehaviour {
 	                }
                 }
             }
-
+	
+			// delete turret
             if (Input.GetKey(KeyCode.X) && Input.GetButtonDown("Fire1"))
             {
 	            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
