@@ -153,7 +153,7 @@ public class InputScript : MonoBehaviour {
 			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
 			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
 			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-			
+		
 			if (placeableHits.Any() && !nonPlaceableHits.Any())
 			{
 				var hit = terrainHits.First();
