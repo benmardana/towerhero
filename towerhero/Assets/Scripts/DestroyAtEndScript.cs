@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // If an enemy reaches the end goal, decrement number of player lives by 1 and 
 // destroy the enemy.

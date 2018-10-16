@@ -1,6 +1,4 @@
-﻿using UnityEngine.SceneManagement;
-
-public static class GameState
+﻿public static class GameState
 {
     public const int StartingLives = 30;
     public const int StartingWave = 1;
