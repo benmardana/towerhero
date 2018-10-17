@@ -104,7 +104,7 @@ public class InputScript : MonoBehaviour
 					}
 					else if (_powerName == "Warlock")
 					{
-						Cooldown.coolingDown = true;
+						Cooldown.coolingDownGreen = true;
 						var cannons = _selectedPower.GetComponentsInChildren<FireAbilityScript>();
 						foreach (var cannon in cannons)
 						{
@@ -113,7 +113,7 @@ public class InputScript : MonoBehaviour
 					}
 					else
 					{
-						Cooldown.coolingDown = true;
+						Cooldown.coolingDownFrost = true;
 						var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 						foreach (var enemy in enemies)
 						{
@@ -147,7 +147,15 @@ public class InputScript : MonoBehaviour
 
 	bool canFire()
 	{
-		return !Cooldown.coolingDown || _powerName == "Red" || _powerName == "Purple";
+		if (_powerName == "Red" || _powerName == "Purple")
+		{
+			return true;
+		}
+		if (_powerName == "Frost")
+		{
+			return !Cooldown.coolingDownFrost;
+		}
+		return !Cooldown.coolingDownGreen;
 	}
 
 	bool canHit(IEnumerable<RaycastHit> terrainHits, 
