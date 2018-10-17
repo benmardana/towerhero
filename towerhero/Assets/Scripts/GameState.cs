@@ -46,5 +46,6 @@
         ResetWaveNumber();
         ResetLevelNumber();
         ResourceManager.ResetResources();
+        Cooldown.ResetCooldowns();
     }
 }

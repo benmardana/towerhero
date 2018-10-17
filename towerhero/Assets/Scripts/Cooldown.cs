@@ -4,24 +4,42 @@ using UnityEngine.UI; // Required when Using UI elements.
 public class Cooldown : MonoBehaviour
 {
     public Image frostbite;
-    public static bool coolingDown;
-    public float waitTime = 15.0f;
+    public Image greenability;
+    public static bool coolingDownFrost;
+    public static bool coolingDownGreen;
+    public float frostWaitTime = 15.0f;
+    public float greenWaitTime = 30.0f;
 
     // Update is called once per frame
     void Update()
     {
-        if (coolingDown)
+        if (coolingDownFrost)
         {
-            //Reduce fill amount over 30 seconds
-            frostbite.fillAmount += 1.0f / waitTime * Time.deltaTime;
+            //Reduce fill amount over 15 seconds
+            frostbite.fillAmount += 1.0f / frostWaitTime * Time.deltaTime;
 
             if (frostbite.fillAmount >= 1)
             {
                 frostbite.fillAmount = 0;
-                coolingDown = false;
+                coolingDownFrost = false;
             }
         }
 
+        if (coolingDownGreen)
+        {
+            greenability.fillAmount += 1.0f / greenWaitTime * Time.deltaTime;
 
+            if (greenability.fillAmount >= 1)
+            {
+                greenability.fillAmount = 0;
+                coolingDownGreen = false;
+            }
+        }
+    }
+
+    public static void ResetCooldowns()
+    {
+        coolingDownGreen = false;
+        coolingDownFrost = false;
     }
 }
