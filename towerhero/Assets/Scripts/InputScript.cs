@@ -56,7 +56,7 @@ public class InputScript : MonoBehaviour {
 	public void Update () {
 
 		// Freeze Ability
-		if (Input.GetKey(KeyCode.E) && Cooldown.coolingDown == false)
+		if (Input.GetKey(KeyCode.E) && Cooldown.coolingDownFrost == false)
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
@@ -75,7 +75,7 @@ public class InputScript : MonoBehaviour {
 
 				if (Input.GetButtonDown("Fire1"))
 				{
-                    Cooldown.coolingDown = true;
+                    Cooldown.coolingDownFrost = true;
 					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
 					foreach (var enemy in enemies)
 					{
@@ -101,7 +101,7 @@ public class InputScript : MonoBehaviour {
 		}
 		
 		// Green Flame Ability
-		if (Input.GetKey(KeyCode.R) && Cooldown.coolingDown == false)
+		if (Input.GetKey(KeyCode.R) && Cooldown.coolingDownGreen == false)
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
@@ -120,6 +120,7 @@ public class InputScript : MonoBehaviour {
 
 				if (Input.GetButtonDown("Fire1"))
 				{
+                    Cooldown.coolingDownGreen = true;
 					var greenCannons = _greenFlameAbility.GetComponentsInChildren<FireAbilityScript>();
 					foreach (var cannon in greenCannons)
 					{
