@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +13,12 @@ public class InputScript : MonoBehaviour {
     private GameObject selectedTurret;
     private String turretIndex;
 	
-	public Button _purpleButton;
-	public Button _redButton;
+	public Button PurpleButton;
+	public Button RedButton;
+
+	public Button _frostBiteButton;
+	public Button _warlockFlameButton;
+	public String _selectedAbility;
 
 	private GameObject _freezeAbility;
 	private Light _freezeTarget;
@@ -32,6 +38,7 @@ public class InputScript : MonoBehaviour {
 	// assign all slave scripts in Start()
     void Start () {
 	    
+	    
 		_freezeAbility = GameObject.Find("FreezeAbility");
 		_freezeTarget = _freezeAbility.GetComponent<Light>();
 		_freezeTarget.enabled = false;
@@ -44,13 +51,11 @@ public class InputScript : MonoBehaviour {
 	    _towerTracker = GameObject.Find("TowerTracker");
 	    _towerTarget = _towerTracker.GetComponent<Light>();
 	    
-        _purpleButton.onClick.AddListener(ToggleTurretPurple);
-        _redButton.onClick.AddListener(ToggleTurretRed);
+        PurpleButton.onClick.AddListener(ToggleTurretPurple);
+        RedButton.onClick.AddListener(ToggleTurretRed);
 
-        turretIndex = "Purple";
-        selectedTurret = Turrets[0];
+	    ToggleTurretPurple();
 
-       
     }
 	
 	public void Update () {
@@ -166,7 +171,16 @@ public class InputScript : MonoBehaviour {
 				_towerTargetPosition = new Vector3(_towerTargetPositionX, _towerTargetPositionY, _towerTargetPositionZ);
 				_towerTracker.transform.position = _towerTargetPosition;
 			}
+			else
+			{
+				_towerTarget.enabled = false;
+			}
 		}
+		else
+		{
+			_towerTarget.enabled = false;
+		}
+		
 		if (Input.GetButtonUp("Fire1"))
 		{
 			_towerTarget.enabled = false;
@@ -175,11 +189,11 @@ public class InputScript : MonoBehaviour {
 			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
 			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
 			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-			var hit = terrainHits.First();
 			if (ResourceManager.resources >= 50)
 			{
 				if (placeableHits.Any() && !nonPlaceableHits.Any())
 				{
+					var hit = terrainHits.First();
 					Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
 						hit.point.y + selectedTurret.transform.position.y, hit.point.z);
 					Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
@@ -205,12 +219,18 @@ public class InputScript : MonoBehaviour {
 
     public void ToggleTurretRed()
     {
+	    GameObject.FindWithTag("highlight").transform.position
+		    = RedButton.transform.position;
+	    GameObject.FindWithTag("highlight").GetComponent<Image>().enabled = true;
         turretIndex = "Red";
         selectedTurret = Turrets[1];
     }
 
     public void ToggleTurretPurple()
     {
+	    GameObject.FindWithTag("highlight").transform.position
+		    = PurpleButton.transform.position;
+	    GameObject.FindWithTag("highlight").GetComponent<Image>().enabled = true;
         turretIndex = "Purple";
         selectedTurret = Turrets[0];
     }

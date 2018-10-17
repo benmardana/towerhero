@@ -19,6 +19,7 @@ TagManager:
   - NonPlaceable
   - Placeable
   - Terrain
+  - highlight
   layers:
   - Default
   - TransparentFX
