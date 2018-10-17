@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4664783282081922}
   - component: {fileID: 114268910730484158}
-  - component: {fileID: 114019680449319798}
+  - component: {fileID: 114994008117588292}
   m_Layer: 0
   m_Name: InputObject
   m_TagString: Untagged
@@ -41,7 +41,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114019680449319798
+--- !u!114 &114268910730484158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1763288035952950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4d5c9e42ab3431eaaea810fa1c5958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3.5
+--- !u!114 &114994008117588292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -55,17 +67,9 @@ MonoBehaviour:
   Turrets:
   - {fileID: 1400946923793242, guid: e0239b84dbabe4bf1868f60c164009c7, type: 2}
   - {fileID: 1021195093987756, guid: c24bb4db3569e4a5eb880e03b8d27bcd, type: 2}
-  _purpleButton: {fileID: 0}
-  _redButton: {fileID: 0}
---- !u!114 &114268910730484158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763288035952950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c4d5c9e42ab3431eaaea810fa1c5958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3.5
+  PurpleButton: {fileID: 0}
+  RedButton: {fileID: 0}
+  FrostBiteButton: {fileID: 0}
+  WarlockFlameButton: {fileID: 0}
+  FreezeAbilityModifier: 10
+  FreezeAbilityDuration: 5

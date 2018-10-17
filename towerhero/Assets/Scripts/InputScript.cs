@@ -1,190 +1,131 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InputScript : MonoBehaviour {
-    
-    ClickController clickController;
+
+public class InputScript : MonoBehaviour
+{
+	ClickController clickController;
     WeaponController weaponController;
-	public GameObject[] Turrets;
-    private GameObject selectedTurret;
-    private String turretIndex;
-	
-	public Button _purpleButton;
-	public Button _redButton;
+    public GameObject[] Turrets;
+    
+    public Button PurpleButton;
+    public Button RedButton;
+    public Button FrostBiteButton;
+    public Button WarlockFlameButton;
+    
+    public int FreezeAbilityModifier = 10;
+    public int FreezeAbilityDuration = 5;
 
-	private GameObject _freezeAbility;
-	private Light _freezeTarget;
-	private MeshCollider _FreezeTargetArea;
-	public int FreezeAbilityModifier = 10;
-	public int FreezeAbilityDuration = 5;
-	
-	
-	private GameObject _greenFlameAbility;
-	private Light _greenFlameTarget;
-	private MeshCollider _greenFlameTargetArea;
-	
-	private GameObject _towerTracker;
-	private Light _towerTarget;
-
-
-	// assign all slave scripts in Start()
+    private GameObject _selectedPower;
+	private String _powerName;
+    private GameObject _powerTracker;
+    private Light _powerTarget;
+	private Vector2 _buttonSize;
+    
     void Start () {
 	    
-		_freezeAbility = GameObject.Find("FreezeAbility");
-		_freezeTarget = _freezeAbility.GetComponent<Light>();
-		_freezeTarget.enabled = false;
-		_FreezeTargetArea = _freezeAbility.GetComponentInChildren<MeshCollider>();
+	    PurpleButton.onClick.AddListener(ToggleTurretPurple);
+	    RedButton.onClick.AddListener(ToggleTurretRed);
+	    FrostBiteButton.onClick.AddListener(ToggleFrostBite);
+		WarlockFlameButton.onClick.AddListener(ToggleWarlockFlame);
 	    
-	    _greenFlameAbility = GameObject.Find("GreenFireAbility");
-	    _greenFlameTarget = _greenFlameAbility.GetComponent<Light>();
-	    _greenFlameTarget.enabled = false;
-
-	    _towerTracker = GameObject.Find("TowerTracker");
-	    _towerTarget = _towerTracker.GetComponent<Light>();
+	    // set highlight button size to lowest bounding box - handles some strange sizing issues across levels
+	    _buttonSize = Vector2.Min(
+		    Vector2.Min(FrostBiteButton.GetComponent<RectTransform>().sizeDelta, RedButton.GetComponent<RectTransform>().sizeDelta), 
+		    Vector2.Min(WarlockFlameButton.GetComponent<RectTransform>().sizeDelta, PurpleButton.GetComponent<RectTransform>().sizeDelta));
+	    GameObject.FindWithTag("highlight").GetComponent<RectTransform>().sizeDelta
+		    = _buttonSize;
 	    
-        _purpleButton.onClick.AddListener(ToggleTurretPurple);
-        _redButton.onClick.AddListener(ToggleTurretRed);
-
-        turretIndex = "Purple";
-        selectedTurret = Turrets[0];
-
-       
+	    ToggleTurretPurple();
+	    // highlight button
+	    GameObject.FindWithTag("highlight").GetComponent<Image>().enabled = true;
+	    // ensure position highlight off
+	    _powerTracker.GetComponent<Light>().enabled = false;
     }
-	
-	public void Update () {
 
-		// Freeze Ability
-		if (Input.GetKey(KeyCode.E) && Cooldown.coolingDownFrost == false)
-		{
-			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
-			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
-			
-			if (terrainHits.Any())
-			{
-				var hit = terrainHits.First();
-				_freezeTarget.enabled = true;
-				var _freezeTargetPosition = _freezeAbility.transform.position;
-				var _freezeTargetPositionY = _freezeTargetPosition.y;
-				var _freezeTargetPositionX = hit.point.x;
-				var _freezeTargetPositionZ = hit.point.z;
-				_freezeTargetPosition = new Vector3(_freezeTargetPositionX, _freezeTargetPositionY, _freezeTargetPositionZ);
-				_freezeAbility.transform.position = _freezeTargetPosition;
-
-				if (Input.GetButtonDown("Fire1"))
-				{
-                    Cooldown.coolingDownFrost = true;
-					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-					foreach (var enemy in enemies)
-					{
-						var eCollider = enemy.GetComponent<MeshCollider>();
-						if ((eCollider != null) && _FreezeTargetArea.bounds.Intersects(eCollider.bounds))
-						{
-							// slows down targets
-							// SlowDown(multiplier, duration)
-							enemy.GetComponent<EnemyAIScript>().SlowDown(FreezeAbilityModifier, FreezeAbilityDuration);
-						}
-					}
-					
-				}
-			}
-			else
-			{
-				_freezeTarget.enabled = false;
-			}
-		}
-		else
-		{
-			_freezeTarget.enabled = false;
-		}
+	private void Update()
+	{
 		
-		// Green Flame Ability
-		if (Input.GetKey(KeyCode.R) && Cooldown.coolingDownGreen == false)
-		{
-			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
-			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
-			
-			if (terrainHits.Any())
-			{
-				var hit = terrainHits.First();
-				_greenFlameTarget.enabled = true;
-				var greenFlameTargetPosition = _greenFlameAbility.transform.position;
-				var greenFlameTargetPositionY = greenFlameTargetPosition.y;
-				var greenFlameTargetPositionX = hit.point.x;
-				var greenFlameTargetPositionZ = hit.point.z;
-				greenFlameTargetPosition = new Vector3(greenFlameTargetPositionX, greenFlameTargetPositionY, greenFlameTargetPositionZ);
-				_greenFlameAbility.transform.position = greenFlameTargetPosition;
-
-				if (Input.GetButtonDown("Fire1"))
-				{
-                    Cooldown.coolingDownGreen = true;
-					var greenCannons = _greenFlameAbility.GetComponentsInChildren<FireAbilityScript>();
-					foreach (var cannon in greenCannons)
-					{
-						cannon.Spray();
-					}
-				}
-			}
-			else
-			{
-				_greenFlameTarget.enabled = false;
-			}
-		}
-		else
-		{
-			_greenFlameTarget.enabled = false;
-		}
-		
-		// if input is detected
-		// check what it is then call the relevant function from the slave script
 		if (Input.GetKey(KeyCode.Escape)) {
 			// pause menu camera
 			// TODO
 		}
-
 		
-		// place turret selected
-		if (Input.GetButton("Fire1"))
+		if (Input.GetButton("Fire1") && canFire())
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
 			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
 			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
 			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-		
-			if (placeableHits.Any() && !nonPlaceableHits.Any())
+			if (canHit(terrainHits, placeableHits, nonPlaceableHits))
 			{
 				var hit = terrainHits.First();
-				_towerTarget.enabled = true;
-				_towerTarget.color = turretIndex == "Red" ? Color.red : Color.magenta;
-				var _towerTargetPosition = _freezeAbility.transform.position;
-				var _towerTargetPositionY = _towerTargetPosition.y;
-				var _towerTargetPositionX = hit.point.x;
-				var _towerTargetPositionZ = hit.point.z;
-				_towerTargetPosition = new Vector3(_towerTargetPositionX, _towerTargetPositionY, _towerTargetPositionZ);
-				_towerTracker.transform.position = _towerTargetPosition;
+				_powerTarget.enabled = true;
+				var _powerTargetPosition = _powerTarget.transform.position;
+				var _powerTargetPositionY = _powerTargetPosition.y;
+				var _powerTargetPositionX = hit.point.x;
+				var _powerTargetPositionZ = hit.point.z;
+				_powerTargetPosition = new Vector3(_powerTargetPositionX, _powerTargetPositionY, _powerTargetPositionZ);
+				_powerTracker.transform.position = _powerTargetPosition;
+			}
+			else
+			{
+				_powerTarget.enabled = false;
 			}
 		}
-		if (Input.GetButtonUp("Fire1"))
+		else
 		{
-			_towerTarget.enabled = false;
+			_powerTarget.enabled = false;
+		}
+		
+		if (Input.GetButtonUp("Fire1") && canFire())
+		{
+			_powerTarget.enabled = false;
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
 			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
 			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
 			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-			var hit = terrainHits.First();
 			if (ResourceManager.resources >= 50)
 			{
-				if (placeableHits.Any() && !nonPlaceableHits.Any())
+				if (canHit(terrainHits, placeableHits, nonPlaceableHits))
 				{
-					Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
-						hit.point.y + selectedTurret.transform.position.y, hit.point.z);
-					Instantiate(selectedTurret, instantiationPoint, Quaternion.identity);
-					ResourceManager.TurretBuilt(turretIndex);
+					var hit = terrainHits.First();
+					if (_powerName == "Red" || _powerName == "Purple")
+					{
+						Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
+							hit.point.y + _selectedPower.transform.position.y, hit.point.z);
+						Instantiate(_selectedPower, instantiationPoint, Quaternion.identity);
+						ResourceManager.TurretBuilt(_powerName);
+					}
+					else if (_powerName == "Warlock")
+					{
+						Cooldown.coolingDown = true;
+						var cannons = _selectedPower.GetComponentsInChildren<FireAbilityScript>();
+						foreach (var cannon in cannons)
+						{
+							cannon.Spray();
+						}
+					}
+					else
+					{
+						Cooldown.coolingDown = true;
+						var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+						foreach (var enemy in enemies)
+						{
+							var eCollider = enemy.GetComponent<MeshCollider>();
+							if ((eCollider != null) && _selectedPower.GetComponentInChildren<MeshCollider>().bounds.Intersects(eCollider.bounds))
+							{
+								// slows down targets
+								// SlowDown(multiplier, duration)
+								enemy.GetComponent<EnemyAIScript>().SlowDown(FreezeAbilityModifier, FreezeAbilityDuration);
+							}
+						}
+					}
 				}
 			}
 		}
@@ -198,21 +139,96 @@ public class InputScript : MonoBehaviour {
 			if (turretHits.Any())
 			{
 				Destroy(turretHits.First().collider.gameObject);
-				ResourceManager.ReturnResources(turretIndex);
+				var turretDestroyed = turretHits.First().collider.gameObject.name == "PurpleTower"? "Purple" : "Red";
+				ResourceManager.ReturnResources(turretDestroyed);
 			}
 		}
-
 	}
 
-    public void ToggleTurretRed()
-    {
-        turretIndex = "Red";
-        selectedTurret = Turrets[1];
-    }
+	bool canFire()
+	{
+		return !Cooldown.coolingDown || _powerName == "Red" || _powerName == "Purple";
+	}
 
-    public void ToggleTurretPurple()
-    {
-        turretIndex = "Purple";
-        selectedTurret = Turrets[0];
-    }
+	bool canHit(IEnumerable<RaycastHit> terrainHits, 
+		IEnumerable<RaycastHit> placeableHits, 
+		IEnumerable<RaycastHit> nonPlaceableHits)
+	{
+		if (_powerName == "Red" || _powerName == "Purple")
+		{
+			return placeableHits.Any() && !nonPlaceableHits.Any();
+		}
+		return terrainHits.Any();
+	}
+
+	public void ToggleTurretPurple()
+	{
+		// update button highlight
+		GameObject.FindWithTag("highlight").transform.position
+			= PurpleButton.transform.position;
+		
+		// update selected power
+		_powerName = "Purple";
+		_selectedPower = Turrets[0];
+		
+		// update tracker
+		_powerTracker = GameObject.Find("TowerTracker");
+		
+		// update tracker light
+		_powerTarget = _powerTracker.GetComponent<Light>();
+		_powerTarget.color = Color.magenta;
+	}
+	
+	public void ToggleTurretRed()
+	{
+		// update button highlight
+		GameObject.FindWithTag("highlight").transform.position
+			= RedButton.transform.position;
+		// update selected power
+		_powerName = "Red";
+		_selectedPower = Turrets[1];
+		
+		// update tracker
+		_powerTracker = GameObject.Find("TowerTracker");
+		
+		// update tracker light
+		_powerTarget = _powerTracker.GetComponent<Light>();
+		_powerTarget.color = Color.red;
+	}
+
+	public void ToggleFrostBite()
+	{
+		// update button highlight
+		GameObject.FindWithTag("highlight").transform.position
+			= FrostBiteButton.transform.position;
+		
+		// update selected power
+		_powerName = "Frost";
+		_selectedPower = GameObject.Find("FreezeAbility");
+		
+		// update tracker
+		_powerTracker = GameObject.Find("FreezeAbility");
+
+		// update tracker light
+		_powerTarget = _powerTracker.GetComponent<Light>();
+	}
+	
+	public void ToggleWarlockFlame()
+	{
+		// update button highlight
+		GameObject.FindWithTag("highlight").transform.position
+			= WarlockFlameButton.transform.position;
+		
+		// update selected power
+		_powerName = "Warlock";
+		_selectedPower = GameObject.Find("GreenFireAbility");
+		
+		// update tracker
+		_powerTracker = GameObject.Find("GreenFireAbility");
+		
+		// update tracker light
+		_powerTarget = _powerTracker.GetComponent<Light>();
+	}
+	
+	
 }
