@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class InputScript : MonoBehaviour
 {
-	ClickController clickController;
-    WeaponController weaponController;
     public GameObject[] Turrets;
     
     public Button PurpleButton;
@@ -38,23 +36,33 @@ public class InputScript : MonoBehaviour
 		    Vector2.Min(WarlockFlameButton.GetComponent<RectTransform>().sizeDelta, PurpleButton.GetComponent<RectTransform>().sizeDelta));
 	    GameObject.FindWithTag("highlight").GetComponent<RectTransform>().sizeDelta
 		    = _buttonSize;
-	    
+
+	    // cycle through all abilities and ensure tracking turned off
+	    ToggleWarlockFlame();
+	    _powerTracker.GetComponent<Light>().enabled = false;
+	    ToggleFrostBite();
+	    _powerTracker.GetComponent<Light>().enabled = false;
+	    ToggleTurretRed();
+	    _powerTracker.GetComponent<Light>().enabled = false;
 	    ToggleTurretPurple();
+	    _powerTracker.GetComponent<Light>().enabled = false;
+	    
 	    // highlight button
 	    GameObject.FindWithTag("highlight").GetComponent<Image>().enabled = true;
-	    // ensure position highlight off
-	    _powerTracker.GetComponent<Light>().enabled = false;
+	    
+	    
     }
 
 	private void Update()
 	{
 		
-		if (Input.GetKey(KeyCode.Escape)) {
-			// pause menu camera
-			// TODO
+		if (Input.GetKey(KeyCode.Escape))
+		{
+			// See Pause Game Script
 		}
 		
-		if (Input.GetButton("Fire1") && canFire())
+		
+		if (canFireDown())
 		{
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			var hits = Physics.RaycastAll(ray.origin, ray.direction, 2000f);
@@ -82,7 +90,7 @@ public class InputScript : MonoBehaviour
 			_powerTarget.enabled = false;
 		}
 		
-		if (Input.GetButtonUp("Fire1") && canFire())
+		if (canFireUp())
 		{
 			_powerTarget.enabled = false;
 			var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -145,17 +153,30 @@ public class InputScript : MonoBehaviour
 		}
 	}
 
-	bool canFire()
+	bool canFireDown()
 	{
 		if (_powerName == "Red" || _powerName == "Purple")
 		{
-			return true;
+			return Input.GetButton("Fire1");
 		}
 		if (_powerName == "Frost")
 		{
 			return !Cooldown.coolingDownFrost;
 		}
 		return !Cooldown.coolingDownGreen;
+	}
+
+	bool canFireUp()
+	{
+		if (_powerName == "Red" || _powerName == "Purple")
+		{
+			return Input.GetButtonUp("Fire1");
+		}
+		if (_powerName == "Frost")
+		{
+			return !Cooldown.coolingDownFrost && Input.GetButtonDown("Fire1");
+		}
+		return !Cooldown.coolingDownGreen && Input.GetButtonDown("Fire1");
 	}
 
 	bool canHit(IEnumerable<RaycastHit> terrainHits, 
