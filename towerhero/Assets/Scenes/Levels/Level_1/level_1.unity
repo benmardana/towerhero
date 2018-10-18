@@ -5185,6 +5185,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 78cb0421df5cde348aefc9e7f9728ef5, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1244606446 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114206905843777942, guid: 78cb0421df5cde348aefc9e7f9728ef5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1244606445}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1282471845
 Prefab:
   m_ObjectHideFlags: 0
@@ -5605,6 +5611,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 67ba25b426a528e4a9330833f89e2f89, type: 2}
   m_PrefabInternal: {fileID: 1374148154}
+--- !u!114 &1410145624 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114096922397990508, guid: 78cb0421df5cde348aefc9e7f9728ef5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1244606445}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1434928744
 Prefab:
   m_ObjectHideFlags: 0
@@ -5706,6 +5718,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114253299594331482, guid: d4eb7c75a8d5c4b5481a1548c06f3d4e,
+        type: 2}
+      propertyPath: restart
+      value: 
+      objectReference: {fileID: 1410145624}
+    - target: {fileID: 114253299594331482, guid: d4eb7c75a8d5c4b5481a1548c06f3d4e,
+        type: 2}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 1244606446}
     - target: {fileID: 33034004383112438, guid: d4eb7c75a8d5c4b5481a1548c06f3d4e,
         type: 2}
       propertyPath: m_Mesh
@@ -6790,7 +6812,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1598
+  m_Name: pb_Mesh-302758
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

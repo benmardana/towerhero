@@ -1,11 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseGame : MonoBehaviour
 {
+
+    public Button resume;
+
     public Transform canvas;
 
     private void Start()
     {
+
+        Button resumeButton = resume.GetComponent<Button>();
+        resumeButton.onClick.AddListener(Pause);
         canvas.gameObject.SetActive(false);
     }
 
@@ -16,6 +23,7 @@ public class PauseGame : MonoBehaviour
         {
             Pause();
         }
+  
     }
     public void Pause()
     {
