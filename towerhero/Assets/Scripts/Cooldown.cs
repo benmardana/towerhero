@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; // Required when Using UI elements.
+using UnityEngine.UI; // Required when Using UI elements
+
+// inspiration taken from this video: https://www.youtube.com/watch?v=8Xgao1qP7xw
 
 public class Cooldown : MonoBehaviour
 {

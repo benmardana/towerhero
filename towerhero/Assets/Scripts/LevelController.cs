@@ -61,7 +61,6 @@ public class LevelController : MonoBehaviour
     IEnumerator ReloadScene(Scene level, int waitTime)
     {
 
-        // TODO - Prevent UI from updating (not working)
         //GameObject canvasObject = (GameObject) GameObject.FindObjectOfType(typeof(Canvas));
         //Text livesText = canvasObject.transform.Find("LivesText").GetComponent<Text>();
         //livesText.enabled = false;

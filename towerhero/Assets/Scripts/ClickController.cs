@@ -7,8 +7,6 @@ public class ClickController : MonoBehaviour {
 	// in this case WorldTerrain, does something with it
 	// in this example I was using it to set the destination of player if using
 	// navmesh agent on player
-	// This method of getting the object you're mouse is on
-	// is probably the best starting point for doing the turret placement
 	
 	GameObject player;
 	GameObject[] enemies;

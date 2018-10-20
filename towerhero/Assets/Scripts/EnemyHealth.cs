@@ -3,7 +3,6 @@
 public class EnemyHealth : MonoBehaviour {
 
     public int initialHealth = 100; // varies for different enemies
-    // TODO public GameObject createOnDestroy;  // something to create when enemy is destroyed
 
 	private int currentHealth;
 

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-// TODO - Adam, I've only done some base stuff so that I can make the targeting controller
 public class TurretController : MonoBehaviour {
 
     public float range = 15;

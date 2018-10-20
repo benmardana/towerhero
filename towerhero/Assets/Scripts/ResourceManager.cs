@@ -8,13 +8,11 @@
 
     public static int resources = StartingResources;
 
-    // TODO(Adam) In future this will take an enemy type and determine amt.
     public static void EnemyIsKilled()
     {
         resources += EnemyKilledResources;
     }
 
-    // TODO(Adam) - This will also take a turret type.
     public static void TurretBuilt(string turretType)
     {
         if (turretType == "Red")
@@ -27,7 +25,6 @@
         }
     }
 
-    // TODO(Adam) - In future this should take a bridge or turret type and dynamically calculate a percentage (~80%)? to return.
     public static void ReturnResources(string turretType)
     {
         if (turretType == "Red")

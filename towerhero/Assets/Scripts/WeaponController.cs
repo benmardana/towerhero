@@ -2,7 +2,6 @@
 using UnityEngine.Serialization;
 
 
-// TODO - firerate, this only applies to turrets not to heros? also depends on weapon type...
 // Note: My current design assumes all weapons are automatic (i.e. have a firerate)
 public class WeaponController : MonoBehaviour {
 
@@ -34,9 +33,6 @@ public class WeaponController : MonoBehaviour {
 
         // Instantiate a projectile
         Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation);
-
-
-        // TODO (Optional) Smoke / etc effect visible at end of weapon barrel
 
     }
 

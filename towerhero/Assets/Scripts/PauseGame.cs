@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+// Inspiration from this video: https://www.youtube.com/watch?v=PyEmRVRHWL8
+
 public class PauseGame : MonoBehaviour
 {
 

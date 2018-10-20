@@ -16,6 +16,9 @@ public class TrailScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		// ignores deprecated compiler warning
+#pragma warning disable 618
 		_particleSystem.startRotation = _parentProjectile.transform.rotation.eulerAngles.y * Mathf.Deg2Rad;
+#pragma warning restore 618
 	}
 }

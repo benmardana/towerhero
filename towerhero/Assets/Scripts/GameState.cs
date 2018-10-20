@@ -37,9 +37,7 @@
 
 
         levelNumber++;
-        if (levelNumber > FinalLevel) {
-            // TODO - Ensure that last level is loaded
-        }
+
     }
 
     public static void ResetGameState()

@@ -68,6 +68,9 @@ public class LeadingTargetingScript : MonoBehaviour {
 
 	}
 	
+	
+	// lead targeting implemented usingm and adapted to our use, from this:
+	// http://wiki.unity3d.com/index.php?title=Calculating_Lead_For_Projectiles
 	void UpdateTarget() {
 
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag(EnemyTag);
