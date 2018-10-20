@@ -689,12 +689,12 @@ Prefab:
     - target: {fileID: 114608566874501100, guid: d3c801238902c4c639fe7252756ae86f,
         type: 2}
       propertyPath: SecondsBetweenWaves
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114608566874501100, guid: d3c801238902c4c639fe7252756ae86f,
         type: 2}
       propertyPath: EnemyGroupsPerWave
-      value: 1
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 114608566874501100, guid: d3c801238902c4c639fe7252756ae86f,
         type: 2}
@@ -3889,7 +3889,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh9978
+  m_Name: pb_Mesh104384
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -13151,7 +13151,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1084
+  m_Name: pb_Mesh-2165776
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -14366,8 +14366,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyUnits:
   - {fileID: 4328241616467092, guid: e1eedcdbb3f634d20aaf247c46bf52dc, type: 2}
-  SecondsBetweenWaves: 4
-  EnemyGroupsPerWave: 1
+  SecondsBetweenWaves: 6
+  EnemyGroupsPerWave: 12
   SecondsBetweenGroupsInWave: 1
 --- !u!1001 &1380667344
 Prefab:
