@@ -36,10 +36,11 @@ public class Cooldown : MonoBehaviour
             }
         }
     }
-
+  
     public static void ResetCooldowns()
     {
         coolingDownGreen = false;
         coolingDownFrost = false;
     }
+   
 }
