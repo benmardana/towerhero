@@ -98,44 +98,43 @@ public class InputScript : MonoBehaviour
 			var terrainHits = hits.Where(x => x.collider.CompareTag("Terrain"));
 			var placeableHits = hits.Where(x => x.collider.CompareTag("Placeable"));
 			var nonPlaceableHits = hits.Where(x => x.collider.CompareTag("NonPlaceable"));
-			if (ResourceManager.resources >= 50)
+
+			if (canHit(terrainHits, placeableHits, nonPlaceableHits))
 			{
-				if (canHit(terrainHits, placeableHits, nonPlaceableHits))
+				var hit = terrainHits.First();
+				if (_powerName == "Red" && ResourceManager.resources >= ResourceManager.RedCostResources 
+                    || _powerName == "Purple" && ResourceManager.resources >= ResourceManager.PurpleCostResources) {
+					Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
+						hit.point.y + _selectedPower.transform.position.y, hit.point.z);
+					Instantiate(_selectedPower, instantiationPoint, Quaternion.identity);
+					ResourceManager.TurretBuilt(_powerName);
+				}
+				else if (_powerName == "Warlock")
 				{
-					var hit = terrainHits.First();
-					if (_powerName == "Red" || _powerName == "Purple")
+					Cooldown.coolingDownGreen = true;
+					var cannons = _selectedPower.GetComponentsInChildren<FireAbilityScript>();
+					foreach (var cannon in cannons)
 					{
-						Vector3 instantiationPoint = new Vector3(hit.point.x + 1.6f,
-							hit.point.y + _selectedPower.transform.position.y, hit.point.z);
-						Instantiate(_selectedPower, instantiationPoint, Quaternion.identity);
-						ResourceManager.TurretBuilt(_powerName);
+						cannon.Spray();
 					}
-					else if (_powerName == "Warlock")
+				}
+				else if (_powerName == "Frost")
+				{
+					Cooldown.coolingDownFrost = true;
+					var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+					foreach (var enemy in enemies)
 					{
-						Cooldown.coolingDownGreen = true;
-						var cannons = _selectedPower.GetComponentsInChildren<FireAbilityScript>();
-						foreach (var cannon in cannons)
+						var eCollider = enemy.GetComponent<MeshCollider>();
+						if ((eCollider != null) && _selectedPower.GetComponentInChildren<MeshCollider>().bounds.Intersects(eCollider.bounds))
 						{
-							cannon.Spray();
-						}
-					}
-					else
-					{
-						Cooldown.coolingDownFrost = true;
-						var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-						foreach (var enemy in enemies)
-						{
-							var eCollider = enemy.GetComponent<MeshCollider>();
-							if ((eCollider != null) && _selectedPower.GetComponentInChildren<MeshCollider>().bounds.Intersects(eCollider.bounds))
-							{
-								// slows down targets
-								// SlowDown(multiplier, duration)
-								enemy.GetComponent<EnemyAIScript>().SlowDown(FreezeAbilityModifier, FreezeAbilityDuration);
-							}
+							// slows down targets
+							// SlowDown(multiplier, duration)
+							enemy.GetComponent<EnemyAIScript>().SlowDown(FreezeAbilityModifier, FreezeAbilityDuration);
 						}
 					}
 				}
 			}
+			
 		}
 
 		// delete turret
