@@ -33,6 +33,8 @@
         ResetLives();
         ResetWaveNumber();
         ResourceManager.ResetResources();
+        Cooldown.ResetCooldowns();
+
 
         levelNumber++;
         if (levelNumber > FinalLevel) {
